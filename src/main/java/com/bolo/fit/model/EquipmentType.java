@@ -17,11 +17,11 @@ import java.util.List;
 public class EquipmentType extends BaseEntity {
 
     @Id
-    @SequenceGenerator(name = "idequipment_type_id_seq",
-            sequenceName = "idequipment_type_id_seq",
+    @SequenceGenerator(name = "fitapp.idequipment_type_id_seq",
+            sequenceName = "fitapp.idequipment_type_id_seq",
             allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "idequipment_type_id_seq")
+            generator = "fitapp.idequipment_type_id_seq")
     @Column(name = "id")
     private Long equipmentTypeId;
 

@@ -6,12 +6,10 @@ import com.bolo.fit.model.Exercise;
 import com.bolo.fit.model.ExerciseRoutine;
 import com.bolo.fit.model.ExerciseRoutineExercise;
 import com.bolo.fit.repository.ExerciseRoutineRepository;
-import com.bolo.fit.service.dto.request.CreateExerciseRoutineRequestDTO;
-import com.bolo.fit.service.dto.request.DadosExercicioPaginacaoDTO;
-import com.bolo.fit.service.dto.request.ExerciseRoutineExerciseRequestDTO;
-import com.bolo.fit.service.dto.request.UpdateExerciseRoutineRequestDTO;
+import com.bolo.fit.service.dto.request.*;
 import com.bolo.fit.service.dto.response.ExerciseRoutinePaginatedResponseDTO;
 import com.bolo.fit.service.dto.response.ExerciseRoutineResponseDTO;
+import com.bolo.fit.utils.RandomUtils;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -73,6 +71,44 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
         log.info("Searching Exercise Routine");
         ExerciseRoutine er = repository.findById(exerciseRoutineId).orElseThrow(() -> new ApiErrorException(HttpStatus.BAD_REQUEST, MessageEnum.ROUTINE_NOT_FOUND));
         log.info("Exercise Routine Found");
+        return new ExerciseRoutineResponseDTO(er, true);
+    }
+
+    public ExerciseRoutineResponseDTO generateRandomRoutine(CreateRandomExerciseRoutineRequestDTO createRandomExerciseRoutine) throws ApiErrorException {
+        log.info("Creating Exercise Routine With random exercises");
+        List<Exercise> selectedExercises = exerciseService.findExercisesForRandomRoutine(createRandomExerciseRoutine);
+        List<Exercise> filteredExercises = new ArrayList<>();
+        if(selectedExercises.isEmpty()){
+            throw new ApiErrorException(HttpStatus.BAD_REQUEST, MessageEnum.EXERCISE_NOT_FOUND);
+        }
+        for (int i = 0; i < createRandomExerciseRoutine.getAmountOfExercises() ; i++) {
+            Exercise currentExercise = selectedExercises.get(RandomUtils.selectNumberInRange(selectedExercises.size()));
+                if(filteredExercises.contains(currentExercise)){
+                    continue;
+                }
+                filteredExercises.add(selectedExercises.get(RandomUtils.selectNumberInRange(selectedExercises.size())));
+        }
+        ExerciseRoutine routine = new ExerciseRoutine();
+        routine.setName("Nova Rotina de "+ filteredExercises.get(0).getBodyPart().getNome());
+        routine.setDescription("");
+        routine.setRepetitions(15);
+        routine.setSeries(3);
+        routine.setIsVisible(true);
+        routine.setRestTime(1.0);
+        List<ExerciseRoutineExercise> exerciseList = new ArrayList<>();
+        for(Exercise ex :  filteredExercises){
+            ExerciseRoutineExercise ere = new ExerciseRoutineExercise();
+            ere.setSeries(null);
+            ere.setRepetitions(null);
+            ere.setRest_time(null);
+            ere.setNotes(null);
+            ere.setExerciseRoutine(routine);
+            ere.setExercise(ex);
+            exerciseList.add(ere);
+        };
+        routine.setExerciseRoutineExercise(exerciseList);
+        ExerciseRoutine er = repository.save(routine);
+        log.info("Exercise Routine Created");
         return new ExerciseRoutineResponseDTO(er, true);
     }
 

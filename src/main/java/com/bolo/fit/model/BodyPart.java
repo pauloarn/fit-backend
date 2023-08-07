@@ -17,11 +17,11 @@ import java.util.List;
 @Table(name = "BodyPart", catalog = Catalog.FIT_DATA_BASE, schema = Schema.FitApp)
 public class BodyPart extends BaseEntity {
     @Id
-    @SequenceGenerator(name = "idbodypart_id_seq",
-            sequenceName = "idbodypart_id_seq",
+    @SequenceGenerator(name = "fitapp.idbodypart_id_seq",
+            sequenceName = "fitapp.idbodypart_id_seq",
             allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "idbodypart_id_seq")
+            generator = "fitapp.idbodypart_id_seq")
     @Column(name = "id")
     private Long bodyPartId;
 

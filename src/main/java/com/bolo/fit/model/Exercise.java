@@ -18,11 +18,11 @@ import java.io.IOException;
 @Table(name = "Exercises", catalog = Catalog.FIT_DATA_BASE, schema = Schema.FitApp)
 public class Exercise extends BaseEntity {
     @Id
-    @SequenceGenerator(name = "idexercises_id_seq",
-            sequenceName = "idexercises_id_seq",
+    @SequenceGenerator(name = "fitapp.idexercises_id_seq",
+            sequenceName = "fitapp.idexercises_id_seq",
             allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "idexercises_id_seq")
+            generator = "fitapp.idexercises_id_seq")
     @Column(name = "id")
     private Long execiseId;
 

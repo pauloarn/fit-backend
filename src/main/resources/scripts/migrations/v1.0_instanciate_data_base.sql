@@ -1,16 +1,16 @@
 create schema FitApp;
 
-CREATE SEQUENCE idbodypart_id_seq;
-CREATE SEQUENCE idequipment_type_id_seq;
-CREATE SEQUENCE idexercise_type_id_seq;
-CREATE SEQUENCE idexercises_id_seq;
-CREATE SEQUENCE idexercise_routine_id_seq;
-CREATE SEQUENCE idexercise_routine_exercise_id_seq;
+CREATE SEQUENCE fitapp.idbodypart_id_seq;
+CREATE SEQUENCE fitapp.idequipment_type_id_seq;
+CREATE SEQUENCE fitapp.idexercise_type_id_seq;
+CREATE SEQUENCE fitapp.idexercises_id_seq;
+CREATE SEQUENCE fitapp.idexercise_routine_id_seq;
+CREATE SEQUENCE fitapp.idexercise_routine_exercise_id_seq;
 
 
 create table fitapp.bodypart
 (
-    id        bigint    not null primary key default nextval('idbodypart_id_seq'),
+    id        bigint    not null primary key default nextval('fitapp.idbodypart_id_seq'),
     "name"    varchar(255),
     nome      varchar(255),
     createdAt timestamp not null,
@@ -18,7 +18,7 @@ create table fitapp.bodypart
 );
 create table fitapp.equipment_type
 (
-    id        bigint    not null primary key default nextval('idequipment_type_id_seq'),
+    id        bigint    not null primary key default nextval('fitapp.idequipment_type_id_seq'),
     name      varchar(255),
     nome      varchar(255),
     createdAt timestamp not null,
@@ -26,7 +26,7 @@ create table fitapp.equipment_type
 );
 create table fitapp.exercise_type
 (
-    id        bigint    not null primary key default nextval('idexercise_type_id_seq'),
+    id        bigint    not null primary key default nextval('fitapp.idexercise_type_id_seq'),
     name      varchar(255),
     nome      varchar(255),
     createdAt timestamp not null,
@@ -35,7 +35,7 @@ create table fitapp.exercise_type
 
 create table fitapp.exercises
 (
-    id               bigint    not null primary key default nextval('idexercises_id_seq'),
+    id               bigint    not null primary key default nextval('fitapp.idexercises_id_seq'),
     name             varchar(255),
     nome             varchar(255),
     gifUrl           varchar(255),
@@ -52,7 +52,7 @@ create table fitapp.exercises
 );
 
 create table fitapp.exercise_routine (
-    id        bigint    not null primary key default nextval('idexercise_routine_id_seq'),
+    id        bigint    not null primary key default nextval('fitapp.idexercise_routine_id_seq'),
     name            varchar(255),
     description     varchar(255),
     series          int,
@@ -64,7 +64,7 @@ create table fitapp.exercise_routine (
 );
 
 create table fitapp.exercise_routine_exercise (
-    id        bigint    not null primary key default nextval('idexercise_routine_exercise_id_seq'),
+    id        bigint    not null primary key default nextval('fitapp.idexercise_routine_exercise_id_seq'),
     exercise_id     bigint,
     exercise_routine_id bigint,
     notes            varchar(255),

@@ -58,7 +58,7 @@ public class ExerciseRoutinesController {
             @RequestBody CreateRandomExerciseRoutineRequestDTO createRandomExerciseRoutineRequest
     ) throws ApiErrorException {
         Response<ExerciseRoutineResponseDTO> response = new Response<>();
-        response.setOk().setData(exerciseRoutineService.updateExerciseRoutine(null, null));
+        response.setOk().setData(exerciseRoutineService.generateRandomRoutine(createRandomExerciseRoutineRequest));
         return response;
     }
 

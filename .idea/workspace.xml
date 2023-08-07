@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff9e7fe9-9939-4314-b715-cd98e4d48cba" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/utils/RandomUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseRoutine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseRoutine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseRoutineExercise.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseRoutineExercise.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/controller/ExerciseRoutinesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/controller/ExerciseRoutinesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/BodyPart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/BodyPart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/EquipmentType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/EquipmentType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/Exercise.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/Exercise.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/repository/ExerciseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/repository/ExerciseRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/ExerciseRoutineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/ExerciseRoutineService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/ExerciseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/ExerciseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/scripts/migrations/v1.0_instanciate_data_base.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/scripts/migrations/v1.0_instanciate_data_base.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -131,7 +138,7 @@
       <workItem from="1691177606567" duration="6450000" />
       <workItem from="1691235914338" duration="6792000" />
       <workItem from="1691413380055" duration="775000" />
-      <workItem from="1691420293339" duration="500000" />
+      <workItem from="1691420293339" duration="10153000" />
     </task>
     <servers />
   </component>
