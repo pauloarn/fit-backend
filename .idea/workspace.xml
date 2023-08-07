@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ff9e7fe9-9939-4314-b715-cd98e4d48cba" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/FitTechApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/config/Catalog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/config/ClockConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/config/DateConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/config/Schema.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/controller/BodyPartsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/controller/EquipmentTypesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/controller/ExerciseRoutinesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/controller/ExerciseTypeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/controller/ExercisesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/enums/LogContextEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/enums/MessageEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/exceptions/ApiErrorException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/filters/AuthFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/filters/LogFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/BaseEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/BodyPart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/EquipmentType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/Exercise.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseRoutine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseRoutineExercise.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/repository/BodyPartRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/repository/EquipmentTypeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/repository/ExerciseRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/repository/ExerciseRoutineRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/repository/ExerciseTypeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/repository/GenericRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/AbstractService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/AbstractServiceRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/BodyPartService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/EquipmentTypeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/ExerciseRoutineService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/ExerciseService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/ExerciseTypeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/request/CreateExerciseRoutineRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/request/CreateRandomExerciseRoutineRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/request/DadosExercicioPaginacaoDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/request/ExerciseRoutineExerciseRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/request/UpdateExerciseRoutineRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/BaseStatsBaseResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/BodyPartResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/EquipmentTypeResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/ExerciseResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/ExerciseRoutinePaginatedResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/ExerciseRoutineResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/ExerciseTypeResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/ImageBase64ResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/Response.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/RoutineExerciseResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/utils/ExceptionUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/utils/ExercisesGifUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/utils/JsonUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/utils/LogUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bootstrap.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/messages.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/scripts/migrations/v1.0_instanciate_data_base.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/scripts/seeds/firstSeed.sql" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2PFZXjQm3lKxIgbztndajX7K2b6" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/PersonalDev/FitApp/fitApp&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;6910ea7b26ebc94a48cdaa34e59f63db&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;,
+      &quot;sqlserver&quot;
+    ]
+  }
+}</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\PersonalDev\FitApp\fit-backend\src\main\resources\scripts\seeds" />
+      <recent name="D:\PersonalDev\FitApp\fit-backend\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\PersonalDev\FitApp\fit-backend\src\main\resources\scripts\" />
+      <recent name="D:\PersonalDev\FitApp\fit-backend\src\main\resources" />
+      <recent name="D:\PersonalDev\FitApp\fit-backend\src\main\resources\scripts\migrations" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="FitTechApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="fit-backend" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bolo.fit.FitTechApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ff9e7fe9-9939-4314-b715-cd98e4d48cba" name="Changes" comment="" />
+      <created>1683054833599</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1683054833599</updated>
+      <workItem from="1683054835568" duration="846000" />
+      <workItem from="1683056190131" duration="1987000" />
+      <workItem from="1683058851148" duration="2287000" />
+      <workItem from="1683069260185" duration="5653000" />
+      <workItem from="1683077443376" duration="375000" />
+      <workItem from="1683145116185" duration="2732000" />
+      <workItem from="1683222434571" duration="128000" />
+      <workItem from="1683222613799" duration="416000" />
+      <workItem from="1683990205150" duration="4761000" />
+      <workItem from="1684190382752" duration="2256000" />
+      <workItem from="1684522400001" duration="6075000" />
+      <workItem from="1685195350828" duration="2458000" />
+      <workItem from="1685197931650" duration="1394000" />
+      <workItem from="1685208844098" duration="3776000" />
+      <workItem from="1690807565282" duration="3776000" />
+      <workItem from="1690829159720" duration="5295000" />
+      <workItem from="1690911398032" duration="3217000" />
+      <workItem from="1691170473412" duration="798000" />
+      <workItem from="1691177606567" duration="6450000" />
+      <workItem from="1691235914338" duration="6792000" />
+      <workItem from="1691413380055" duration="174000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>

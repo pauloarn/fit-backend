@@ -1,0 +1,24 @@
+version: '3.7'
+
+volumes:
+  tks_pg_vol:
+
+networks:
+  thanks_net:
+    name: thanks_net
+
+services:
+  thanks_db:
+    container_name: fitApp_db
+    image: postgres:14-alpine
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=FitDataBase
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=fitAppStrong@123
+    networks:
+      - thanks_net
+    volumes:
+      - tks_pg_vol:/var/lib/postgresql/data

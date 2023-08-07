@@ -1,0 +1,68 @@
+fit:
+  app:
+    name: fit-tech-java
+  port: 8285
+  log:
+    level: DEBUG
+  database:
+    name: FitDataBase
+    userName: root
+    password: fitAppStrong@123
+    ddlAuto: validate
+    host: localhost
+    port: 5432
+    showSql: false
+
+spring:
+  output:
+    ansi:
+      enabled: detect
+  application:
+    name: ${fit.app.name}
+  jackson:
+    serialization:
+      write_dates_as_timestamps: true
+  datasource:
+    url: jdbc:postgresql://${fit.database.host}:${fit.database.port}/${fit.database.name}
+    username: ${fit.database.username}
+    password: ${fit.database.password}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+      order_by:
+        default_null_ordering: last
+    hibernate:
+      ddl-auto: ${fit.database.ddlAuto}
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: ${fit.database.showSql}
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  web:
+    locale: pt_BR
+    resources:
+      add-mappings: false
+  mvc:
+    format:
+      date: dd/MM/yyyy
+    throw-exception-if-no-handler-found: true
+  servlet:
+    multipart:
+      enabled: false
+
+server:
+  port: ${PORT:${fit.port}}
+  servlet:
+    context-path: ${CONTEXT_PATH:/fit-app}
+
+logging:
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(%-40.40logger{39}){cyan} %clr(:){faint} %clr([${fit.app.name}]){magenta}%clr(%X{cdTransacao}){yellow}%clr(%X{contexto}){blue} %clr(%m%n){%5p} ${LOG_EXCEPTION_CONVERSION_WORD:%wEx}'
+    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %clr([${fit.app.name}]){magenta}%clr(%X{contexto}){magenta}%clr(%X{cdTransacao}){magenta} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}'
+  level:
+    com.fit: ${fit.log.level}
+    root: INFO
