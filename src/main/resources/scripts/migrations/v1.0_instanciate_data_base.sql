@@ -52,7 +52,7 @@ create table fitapp.exercises
 );
 
 create table fitapp.exercise_routine (
-    id        bigint    not null primary key default nextval('idexecise_routine_id_seq'),
+    id        bigint    not null primary key default nextval('idexercise_routine_id_seq'),
     name            varchar(255),
     description     varchar(255),
     series          int,
@@ -64,7 +64,7 @@ create table fitapp.exercise_routine (
 );
 
 create table fitapp.exercise_routine_exercise (
-    id        bigint    not null primary key default nextval('idexecise_routine_exercise_id_seq'),
+    id        bigint    not null primary key default nextval('idexercise_routine_exercise_id_seq'),
     exercise_id     bigint,
     exercise_routine_id bigint,
     notes            varchar(255),

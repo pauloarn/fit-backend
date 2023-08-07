@@ -17,11 +17,11 @@ import java.util.List;
 public class ExerciseRoutine extends BaseEntity {
 
     @Id
-    @SequenceGenerator(name = "fitapp.idexecise_routine_id_seq",
-            sequenceName = "fitapp.idexecise_routine_id_seq",
+    @SequenceGenerator(name = "fitapp.idexercise_routine_id_seq",
+            sequenceName = "fitapp.idexercise_routine_id_seq",
             allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "fitapp.idexecise_routine_id_seq")
+            generator = "fitapp.idexercise_routine_id_seq")
     @Column(name = "id")
     private Long exerciseRoutineId;
 

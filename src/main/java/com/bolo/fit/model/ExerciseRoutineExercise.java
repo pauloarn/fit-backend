@@ -15,11 +15,11 @@ import javax.persistence.*;
 @Table(name = "exercise_routine_exercise", catalog = Catalog.FIT_DATA_BASE, schema = Schema.FitApp)
 public class ExerciseRoutineExercise extends BaseEntity{
     @Id
-    @SequenceGenerator(name = "idexecise_routine_exercise_id_seq",
-            sequenceName = "idexecise_routine_exercise_id_seq",
+    @SequenceGenerator(name = "fitapp.idexercise_routine_exercise_id_seq",
+            sequenceName = "fitapp.idexercise_routine_exercise_id_seq",
             allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "idexecise_routine_exercise_id_seq")
+            generator = "fitapp.idexercise_routine_exercise_id_seq")
     @Column(name = "id")
     private Long exerciseRoutineId;
 

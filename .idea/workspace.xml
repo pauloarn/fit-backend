@@ -5,74 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff9e7fe9-9939-4314-b715-cd98e4d48cba" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/FitTechApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/config/Catalog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/config/ClockConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/config/DateConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/config/Schema.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/controller/BodyPartsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/controller/EquipmentTypesController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/controller/ExerciseRoutinesController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/controller/ExerciseTypeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/controller/ExercisesController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/enums/LogContextEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/enums/MessageEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/exceptions/ApiErrorException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/filters/AuthFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/filters/LogFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/BaseEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/BodyPart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/EquipmentType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/Exercise.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseRoutine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseRoutineExercise.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/repository/BodyPartRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/repository/EquipmentTypeRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/repository/ExerciseRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/repository/ExerciseRoutineRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/repository/ExerciseTypeRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/repository/GenericRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/AbstractService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/AbstractServiceRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/BodyPartService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/EquipmentTypeService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/ExerciseRoutineService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/ExerciseService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/ExerciseTypeService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/request/CreateExerciseRoutineRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/request/CreateRandomExerciseRoutineRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/request/DadosExercicioPaginacaoDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/request/ExerciseRoutineExerciseRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/request/UpdateExerciseRoutineRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/BaseStatsBaseResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/BodyPartResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/EquipmentTypeResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/ExerciseResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/ExerciseRoutinePaginatedResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/ExerciseRoutineResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/ExerciseTypeResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/ImageBase64ResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/Response.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/response/RoutineExerciseResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/utils/ExceptionUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/utils/ExercisesGifUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/utils/JsonUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/utils/LogUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/bootstrap.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/messages.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/scripts/migrations/v1.0_instanciate_data_base.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/scripts/seeds/firstSeed.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseRoutine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseRoutine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseRoutineExercise.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseRoutineExercise.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/scripts/migrations/v1.0_instanciate_data_base.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/scripts/migrations/v1.0_instanciate_data_base.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,7 +130,8 @@
       <workItem from="1691170473412" duration="798000" />
       <workItem from="1691177606567" duration="6450000" />
       <workItem from="1691235914338" duration="6792000" />
-      <workItem from="1691413380055" duration="174000" />
+      <workItem from="1691413380055" duration="775000" />
+      <workItem from="1691420293339" duration="500000" />
     </task>
     <servers />
   </component>
