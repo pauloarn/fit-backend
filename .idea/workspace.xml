@@ -5,17 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff9e7fe9-9939-4314-b715-cd98e4d48cba" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/utils/RandomUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/controller/SessionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/enums/RoleEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/Users.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/AuthorizationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/request/CreateSessionRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/dto/request/CreateUserRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/scripts/migrations/v1.1_instanciate_users_data_base.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/controller/ExerciseRoutinesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/controller/ExerciseRoutinesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/BodyPart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/BodyPart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/EquipmentType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/EquipmentType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/Exercise.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/Exercise.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/model/ExerciseType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/repository/ExerciseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/repository/ExerciseRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/ExerciseRoutineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/ExerciseRoutineService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/ExerciseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/service/ExerciseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/scripts/migrations/v1.0_instanciate_data_base.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/scripts/migrations/v1.0_instanciate_data_base.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bolo/fit/enums/MessageEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bolo/fit/enums/MessageEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/messages.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +38,31 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="feat/login" />
+                    <option name="lastUsedInstant" value="1691502073" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1691502072" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
   <component name="MavenRunner">
     <option name="skipTests" value="true" />
   </component>
@@ -51,41 +80,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/PersonalDev/FitApp/fitApp&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;6910ea7b26ebc94a48cdaa34e59f63db&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "feat/login",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/PersonalDev/FitApp/fitApp",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "show.migrate.to.gradle.popup": "false",
+    "spring.configuration.checksum": "6910ea7b26ebc94a48cdaa34e59f63db",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;,
-      &quot;sqlserver&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql",
+      "sqlserver"
     ]
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -138,12 +168,26 @@
       <workItem from="1691177606567" duration="6450000" />
       <workItem from="1691235914338" duration="6792000" />
       <workItem from="1691413380055" duration="775000" />
-      <workItem from="1691420293339" duration="10153000" />
+      <workItem from="1691420293339" duration="20131000" />
+      <workItem from="1691502034363" duration="903000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-core" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.security:spring-security-core" />
+    <option featureType="dependencySupport" implementationName="executable:docker" />
+    <option featureType="dependencySupport" implementationName="java:jakarta.validation:jakarta.validation-api" />
+    <option featureType="dependencySupport" implementationName="java:jakarta.persistence:jakarta.persistence-api" />
+    <option featureType="dependencySupport" implementationName="java:io.projectreactor:reactor-core" />
+    <option featureType="dependencySupport" implementationName="executable:kubectl" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.data:spring-data-commons" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.boot:spring-boot" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-webmvc" />
+    <option featureType="dependencySupport" implementationName="java:org.projectlombok:lombok" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

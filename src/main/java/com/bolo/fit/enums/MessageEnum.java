@@ -9,6 +9,8 @@ public enum MessageEnum {
     EXERCISE_NOT_FOUND("message.api.exercise.not.found"),
     EXERCISE_TYPE_NOT_FOUND("message.api.exercise.type.not.found"),
     BODY_PART_NOT_FOUND("message.api.body.part.not.found"),
+    USER_ALREADY_EXISTS("message.api.use.already.exists"),
+    USER_NOT_FOUND("message.api.user.not.found"),
     EQUIPENT_TYPE_NOT_FOUND("message.api.equipment.type.not.found"),
     ROUTINE_NOT_FOUND("message.api.routine.not.found"),
     UNKNOWN_ERROR("message.api.error.desconhecido");
