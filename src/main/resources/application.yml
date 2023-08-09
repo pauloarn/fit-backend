@@ -1,6 +1,7 @@
 fit:
   app:
     name: fit-tech-java
+    secret: ${JWT_SECRET:my-secret-key}
   port: 8285
   log:
     level: DEBUG

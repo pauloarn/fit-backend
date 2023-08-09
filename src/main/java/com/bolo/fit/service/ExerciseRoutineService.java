@@ -5,6 +5,7 @@ import com.bolo.fit.exceptions.ApiErrorException;
 import com.bolo.fit.model.Exercise;
 import com.bolo.fit.model.ExerciseRoutine;
 import com.bolo.fit.model.ExerciseRoutineExercise;
+import com.bolo.fit.model.User;
 import com.bolo.fit.repository.ExerciseRoutineRepository;
 import com.bolo.fit.service.dto.request.*;
 import com.bolo.fit.service.dto.response.ExerciseRoutinePaginatedResponseDTO;
@@ -17,8 +18,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,42 +28,23 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
 
     private final ExerciseService exerciseService;
 
-    public ExerciseRoutineService(ExerciseRoutineRepository repository, ExerciseService exerciseService) {
+    private final UserService userService;
+
+    public ExerciseRoutineService(ExerciseRoutineRepository repository, ExerciseService exerciseService, UserService userService) {
         super(repository);
         this.exerciseService = exerciseService;
+        this.userService = userService;
     }
 
     public Page<ExerciseRoutinePaginatedResponseDTO> getAllRoutines(DadosExercicioPaginacaoDTO paginacaoRequest) {
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        CriteriaQuery<ExerciseRoutine> criteriaQuery = criteriaBuilder.createQuery(ExerciseRoutine.class);
-        List<Predicate> andPredicates = new ArrayList<>();
-
-        Root<ExerciseRoutine> from = criteriaQuery.from(ExerciseRoutine.class);
-
-        andPredicates.add(criteriaBuilder.isTrue(from.get("isVisible")));
-
-        criteriaQuery = criteriaQuery.select(from).where(andPredicates.toArray(new Predicate[0]));
-        List<Order> orderList = new ArrayList<>();
-        orderList.add(criteriaBuilder.asc(from.get("createdAt")));
-        criteriaQuery.orderBy(orderList.toArray(new Order[0]));
-        TypedQuery<ExerciseRoutine> query = em.createQuery(criteriaQuery);
-        CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);
-        Root<ExerciseRoutine> countRoot = countQuery.from(criteriaQuery.getResultType());
-        countRoot.alias(from.getAlias());
-        countQuery.select(criteriaBuilder.count(countRoot)).where(criteriaQuery.getRestriction());
-        Long totalExercises = em.createQuery(countQuery).getSingleResult();
-        log.info("Total de Exercicios encontrados: {}", totalExercises);
-
+        User loggedUser = userService.getLoggedUser();
         int page = paginacaoRequest.getPage();
         int sizePage = paginacaoRequest.getSizePage();
         Pageable pageable = generatePageable(page, sizePage);
-        page = pageable.getPageNumber();
-        query.setFirstResult(page * sizePage);
-        query.setMaxResults(sizePage);
         log.info("Buscando os exercicios");
-        List<ExerciseRoutine> listaExercises = query.getResultList();
+        List<ExerciseRoutine> listaExercises = loggedUser.getListExerciseRoutine();
         List<ExerciseRoutinePaginatedResponseDTO> resultDTO = listaExercises.stream().map(ExerciseRoutinePaginatedResponseDTO::new).collect(Collectors.toList());
-        return new PageImpl<>(resultDTO, pageable, totalExercises);
+        return new PageImpl<>(resultDTO, pageable, listaExercises.size());
     }
 
     public ExerciseRoutineResponseDTO getExerciseRoutineDetail(Long exerciseRoutineId) throws ApiErrorException {
@@ -76,6 +56,7 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
 
     public ExerciseRoutineResponseDTO generateRandomRoutine(CreateRandomExerciseRoutineRequestDTO createRandomExerciseRoutine) throws ApiErrorException {
         log.info("Creating Exercise Routine With random exercises");
+        User loggedUser = userService.getLoggedUser();
         List<Exercise> selectedExercises = exerciseService.findExercisesForRandomRoutine(createRandomExerciseRoutine);
         List<Exercise> filteredExercises = new ArrayList<>();
         if(selectedExercises.isEmpty()){
@@ -89,6 +70,7 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
                 filteredExercises.add(selectedExercises.get(RandomUtils.selectNumberInRange(selectedExercises.size())));
         }
         ExerciseRoutine routine = new ExerciseRoutine();
+        routine.setUser(loggedUser);
         routine.setName("Nova Rotina de "+ filteredExercises.get(0).getBodyPart().getNome());
         routine.setDescription("");
         routine.setRepetitions(15);
@@ -114,25 +96,17 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
 
     public ExerciseRoutineResponseDTO createExerciseRoutine(CreateExerciseRoutineRequestDTO newRoutineData) throws ApiErrorException {
         log.info("Initializing Exercise Routine Creation");
+        User loggedUser = userService.getLoggedUser();
         ExerciseRoutine routine = new ExerciseRoutine();
+        routine.setUser(loggedUser);
         routine.setName(newRoutineData.getRoutineName());
         routine.setDescription(newRoutineData.getObservation());
         routine.setRepetitions(newRoutineData.getRepetitions());
         routine.setSeries(newRoutineData.getSeries());
         routine.setIsVisible(true);
         routine.setRestTime(newRoutineData.getRestTime());
-        List<ExerciseRoutineExercise> exerciseList = new ArrayList<>();
-        for(ExerciseRoutineExerciseRequestDTO ex :  newRoutineData.getExerciseList()){
-            ExerciseRoutineExercise ere = new ExerciseRoutineExercise();
-            Exercise exr = exerciseService.findExerciseById(ex.getExerciseId());
-            ere.setSeries(ex.getSeries());
-            ere.setRepetitions(ex.getRepetitions());
-            ere.setRest_time(ex.getRestTime());
-            ere.setNotes(ex.getObservation());
-            ere.setExerciseRoutine(routine);
-            ere.setExercise(exr);
-            exerciseList.add(ere);
-        };
+        List<ExerciseRoutineExercise> exerciseList = getExerciseRoutineExercisesFromExerciseList(newRoutineData.getExerciseList(), routine);
+        ;
         routine.setExerciseRoutineExercise(exerciseList);
         ExerciseRoutine er = repository.save(routine);
         log.info("Exercise Routine Created");
@@ -148,8 +122,17 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
         routine.setSeries(routineRequestDTO.getSeries());
         routine.setRestTime(routineRequestDTO.getRestTime());
         routine.getExerciseRoutineExercise().clear();
+        List<ExerciseRoutineExercise> exerciseList = getExerciseRoutineExercisesFromExerciseList(routineRequestDTO.getExerciseList(), routine);
+        routine.getExerciseRoutineExercise().addAll(exerciseList);
+        ExerciseRoutine er = repository.save(routine);
+        log.info("Exercise Routine Updated");
+        return new ExerciseRoutineResponseDTO(er, true);
+    }
+
+    private List<ExerciseRoutineExercise> getExerciseRoutineExercisesFromExerciseList(List<ExerciseRoutineExerciseRequestDTO> routineRequestDTO, ExerciseRoutine routine)
+            throws ApiErrorException {
         List<ExerciseRoutineExercise> exerciseList = new ArrayList<>();
-        for(ExerciseRoutineExerciseRequestDTO ex :  routineRequestDTO.getExerciseList()){
+        for (ExerciseRoutineExerciseRequestDTO ex : routineRequestDTO) {
             ExerciseRoutineExercise ere = new ExerciseRoutineExercise();
             Exercise exr = exerciseService.findExerciseById(ex.getExerciseId());
             ere.setSeries(ex.getSeries());
@@ -159,10 +142,8 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
             ere.setExerciseRoutine(routine);
             ere.setExercise(exr);
             exerciseList.add(ere);
-        };
-        routine.getExerciseRoutineExercise().addAll(exerciseList);
-        ExerciseRoutine er = repository.save(routine);
-        log.info("Exercise Routine Updated");
-        return new ExerciseRoutineResponseDTO(er, true);
+        }
+        ;
+        return exerciseList;
     }
 }
