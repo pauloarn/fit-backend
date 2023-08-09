@@ -1,8 +1,10 @@
 package com.bolo.fit.config;
 
+import com.bolo.fit.enums.RoleEnum;
 import com.bolo.fit.filters.AuthFilter;
 import com.bolo.fit.filters.LogFilter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @RequiredArgsConstructor
+@Log4j2
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final LogFilter loggerFilter;
     private final AuthFilter authFilter;
@@ -26,14 +29,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .cors().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .authorizeHttpRequests(auth -> auth
-                    .anyRequest().authenticated()
+            .authorizeHttpRequests(auth ->
+                         auth
+                            .antMatchers("/session").permitAll()
+                            .antMatchers("/user").hasAnyRole(RoleEnum.ADMIN.toString(), RoleEnum.PERSONAL_TRAINER.toString())
+                            .anyRequest().authenticated()
             )
-            .httpBasic().disable()
             .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
-            .addFilterBefore(loggerFilter, AuthFilter.class)
-            .authorizeRequests()
-            .anyRequest().anonymous();
+            .addFilterBefore(loggerFilter, AuthFilter.class);
     }
 
     @Bean

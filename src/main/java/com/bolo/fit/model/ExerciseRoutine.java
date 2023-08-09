@@ -45,4 +45,8 @@ public class ExerciseRoutine extends BaseEntity {
 
     @OneToMany(mappedBy = "exerciseRoutine", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ExerciseRoutineExercise> exerciseRoutineExercise;
+
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    private Users user;
 }

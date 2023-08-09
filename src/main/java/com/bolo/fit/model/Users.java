@@ -42,6 +42,9 @@ public class Users extends BaseEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
 
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<ExerciseRoutine> listExerciseRoutine;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         switch (this.role){

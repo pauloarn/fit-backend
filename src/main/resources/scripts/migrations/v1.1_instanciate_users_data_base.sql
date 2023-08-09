@@ -9,3 +9,6 @@ create table fitapp.users(
      createdAt timestamp not null,
      updatedAt timestamp not null
 );
+
+alter table fitapp.exercise_routine add user_id bigint;
+alter table fitapp.exercise_routine add constraint ExerciseRoutineUser_FK foreign key (user_id) REFERENCES users(id);
