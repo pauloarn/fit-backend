@@ -5,7 +5,7 @@ import com.bolo.fit.exceptions.ApiErrorException;
 import com.bolo.fit.model.Exercise;
 import com.bolo.fit.model.ExerciseRoutine;
 import com.bolo.fit.model.ExerciseRoutineExercise;
-import com.bolo.fit.model.Users;
+import com.bolo.fit.model.User;
 import com.bolo.fit.repository.ExerciseRoutineRepository;
 import com.bolo.fit.service.dto.request.*;
 import com.bolo.fit.service.dto.response.ExerciseRoutinePaginatedResponseDTO;
@@ -37,7 +37,7 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
     }
 
     public Page<ExerciseRoutinePaginatedResponseDTO> getAllRoutines(DadosExercicioPaginacaoDTO paginacaoRequest) {
-        Users loggedUser = userService.getLoggedUser();
+        User loggedUser = userService.getLoggedUser();
         int page = paginacaoRequest.getPage();
         int sizePage = paginacaoRequest.getSizePage();
         Pageable pageable = generatePageable(page, sizePage);
@@ -56,7 +56,7 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
 
     public ExerciseRoutineResponseDTO generateRandomRoutine(CreateRandomExerciseRoutineRequestDTO createRandomExerciseRoutine) throws ApiErrorException {
         log.info("Creating Exercise Routine With random exercises");
-        Users loggedUser = userService.getLoggedUser();
+        User loggedUser = userService.getLoggedUser();
         List<Exercise> selectedExercises = exerciseService.findExercisesForRandomRoutine(createRandomExerciseRoutine);
         List<Exercise> filteredExercises = new ArrayList<>();
         if(selectedExercises.isEmpty()){
@@ -96,7 +96,7 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
 
     public ExerciseRoutineResponseDTO createExerciseRoutine(CreateExerciseRoutineRequestDTO newRoutineData) throws ApiErrorException {
         log.info("Initializing Exercise Routine Creation");
-        Users loggedUser = userService.getLoggedUser();
+        User loggedUser = userService.getLoggedUser();
         ExerciseRoutine routine = new ExerciseRoutine();
         routine.setUser(loggedUser);
         routine.setName(newRoutineData.getRoutineName());

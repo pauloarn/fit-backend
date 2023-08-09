@@ -1,7 +1,7 @@
 package com.bolo.fit.service;
 
 import com.bolo.fit.exceptions.ApiErrorException;
-import com.bolo.fit.model.Users;
+import com.bolo.fit.model.User;
 import com.bolo.fit.service.dto.request.CreateSessionRequestDTO;
 import com.bolo.fit.service.dto.response.SessionResponseDTO;
 import com.bolo.fit.utils.TokenUtils;
@@ -25,7 +25,7 @@ public class AuthorizationService implements UserDetailsService {
     TokenUtils tokenUtils;
 
     @Override
-    public Users loadUserByUsername(String s) throws UsernameNotFoundException {
+    public User loadUserByUsername(String s) throws UsernameNotFoundException {
         try {
             return userService.findUserByEmail(s);
         } catch (ApiErrorException e) {
@@ -36,7 +36,7 @@ public class AuthorizationService implements UserDetailsService {
     public SessionResponseDTO createSession(CreateSessionRequestDTO createSessionRequestDTO) throws ApiErrorException {
         UsernamePasswordAuthenticationToken userNamePassword = new UsernamePasswordAuthenticationToken(createSessionRequestDTO.getUserEmail(), createSessionRequestDTO.getUserPassword());
         var auth = authenticationManager.authenticate(userNamePassword);
-        var token = tokenUtils.generateToken((Users) auth.getPrincipal());
+        var token = tokenUtils.generateToken((User) auth.getPrincipal());
         return new SessionResponseDTO(token);
     }
 }

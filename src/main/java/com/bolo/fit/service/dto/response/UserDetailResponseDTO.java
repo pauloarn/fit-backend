@@ -1,7 +1,7 @@
 package com.bolo.fit.service.dto.response;
 
 import com.bolo.fit.enums.RoleEnum;
-import com.bolo.fit.model.Users;
+import com.bolo.fit.model.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +12,7 @@ public class UserDetailResponseDTO {
     private String email;
     private RoleEnum role;
 
-    public UserDetailResponseDTO(Users user){
+    public UserDetailResponseDTO(User user){
         this.name = user.getName();
         this.email = user.getEmail();
         this.role = user.getRole();

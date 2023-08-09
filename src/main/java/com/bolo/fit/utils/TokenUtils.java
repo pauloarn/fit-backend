@@ -6,7 +6,7 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.bolo.fit.enums.MessageEnum;
 import com.bolo.fit.exceptions.ApiErrorException;
-import com.bolo.fit.model.Users;
+import com.bolo.fit.model.User;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ public class TokenUtils {
 
   @Value("${fit.app.secret}")
   private String secret;
-    public String generateToken(Users user) throws ApiErrorException {
+    public String generateToken(User user) throws ApiErrorException {
       log.info("Generating auth token");
       try{
         Algorithm ag = Algorithm.HMAC256(secret);

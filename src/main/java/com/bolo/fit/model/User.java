@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "users", catalog = Catalog.FIT_DATA_BASE, schema = Schema.FitApp)
-public class Users extends BaseEntity implements UserDetails {
+public class User extends BaseEntity implements UserDetails {
     @Id
     @SequenceGenerator(name = "fitapp.iduser_id_seq",
             sequenceName = "fitapp.iduser_id_seq",

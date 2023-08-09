@@ -2,7 +2,7 @@ package com.bolo.fit.filters;
 
 import com.bolo.fit.enums.MessageEnum;
 import com.bolo.fit.exceptions.ApiErrorException;
-import com.bolo.fit.model.Users;
+import com.bolo.fit.model.User;
 import com.bolo.fit.service.UserService;
 import com.bolo.fit.utils.TokenUtils;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +43,7 @@ public class AuthFilter extends OncePerRequestFilter {
         if(Objects.nonNull(token)){
             try {
                 String email = tokenUtils.validateToken(token);
-                Users user = userService.findUserByEmail(email);
+                User user = userService.findUserByEmail(email);
 
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);

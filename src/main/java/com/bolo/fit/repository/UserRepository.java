@@ -1,9 +1,9 @@
 package com.bolo.fit.repository;
 
-import com.bolo.fit.model.Users;
+import com.bolo.fit.model.User;
 
 import java.util.Optional;
 
-public interface UserRepository extends GenericRepository<Users, Long> {
-    Optional<Users> findUsersByEmail(String userEmail);
+public interface UserRepository extends GenericRepository<User, Long> {
+    Optional<User> findUsersByEmail(String userEmail);
 }
