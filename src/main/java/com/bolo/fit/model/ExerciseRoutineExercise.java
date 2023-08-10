@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -42,4 +43,14 @@ public class ExerciseRoutineExercise extends BaseEntity{
     @ManyToOne()
     @JoinColumn(name="exercise_id")
     private Exercise exercise;
+
+    @OneToMany
+    @JoinTable(
+            name = "bi_set_routine_relation",
+            joinColumns= @JoinColumn(name="bi_set_main_exercise_routine_exercise_fk"),
+            inverseJoinColumns = @JoinColumn(name="bi_set_exercise_fk"),
+            catalog = Catalog.FIT_DATA_BASE,
+            schema = Schema.FitApp
+    )
+    private List<Exercise> secondaryExercisesList;
 }

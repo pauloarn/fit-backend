@@ -106,7 +106,6 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
         routine.setIsVisible(true);
         routine.setRestTime(newRoutineData.getRestTime());
         List<ExerciseRoutineExercise> exerciseList = getExerciseRoutineExercisesFromExerciseList(newRoutineData.getExerciseList(), routine);
-        ;
         routine.setExerciseRoutineExercise(exerciseList);
         ExerciseRoutine er = repository.save(routine);
         log.info("Exercise Routine Created");
@@ -131,19 +130,24 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
 
     private List<ExerciseRoutineExercise> getExerciseRoutineExercisesFromExerciseList(List<ExerciseRoutineExerciseRequestDTO> routineRequestDTO, ExerciseRoutine routine)
             throws ApiErrorException {
-        List<ExerciseRoutineExercise> exerciseList = new ArrayList<>();
+        List<ExerciseRoutineExercise> exerciseRoutineList = new ArrayList<>();
         for (ExerciseRoutineExerciseRequestDTO ex : routineRequestDTO) {
             ExerciseRoutineExercise ere = new ExerciseRoutineExercise();
+            List<Exercise> exerciseList = new ArrayList<>();
+            for(Long exerciseId : ex.getBiSetExercises()){
+                Exercise exrcise = exerciseService.findExerciseById(exerciseId);
+                exerciseList.add(exrcise);
+            }
             Exercise exr = exerciseService.findExerciseById(ex.getExerciseId());
             ere.setSeries(ex.getSeries());
+            ere.setSecondaryExercisesList(exerciseList);
             ere.setRepetitions(ex.getRepetitions());
             ere.setRest_time(ex.getRestTime());
             ere.setNotes(ex.getObservation());
             ere.setExerciseRoutine(routine);
             ere.setExercise(exr);
-            exerciseList.add(ere);
+            exerciseRoutineList.add(ere);
         }
-        ;
-        return exerciseList;
+        return exerciseRoutineList;
     }
 }
