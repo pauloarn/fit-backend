@@ -7,6 +7,7 @@ import com.bolo.fit.model.EquipmentType;
 import com.bolo.fit.model.Exercise;
 import com.bolo.fit.model.ExerciseType;
 import com.bolo.fit.repository.ExerciseRepository;
+import com.bolo.fit.service.dto.CriteriaResultDTO;
 import com.bolo.fit.service.dto.request.CreateRandomExerciseRoutineRequestDTO;
 import com.bolo.fit.service.dto.request.DadosExercicioPaginacaoDTO;
 import com.bolo.fit.service.dto.response.ExerciseResponseDTO;
@@ -32,12 +33,22 @@ public class ExerciseService extends AbstractServiceRepo<ExerciseRepository, Exe
     }
 
     public Page<ExerciseResponseDTO> buscaTodosExercicios(DadosExercicioPaginacaoDTO paginacaoRequest) throws IOException {
+        CreateRandomExerciseRoutineRequestDTO baseDto = new CreateRandomExerciseRoutineRequestDTO(
+                paginacaoRequest.getBodyPartId(),
+                paginacaoRequest.getExerciseTypeId(),
+                paginacaoRequest.getEquipmentTypeId(),
+                null
+        );
+        CriteriaResultDTO baseCriteria = getBaseCriteria(baseDto);
+        var andPredicates = baseCriteria.getAndPredicates();
+        var criteriaBuilder = baseCriteria.getCriteriaBuilder();
+        var criteriaQuery = baseCriteria.getCriteriaQuery();
+        var from = baseCriteria.getFrom();
 
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        CriteriaQuery<Exercise> criteriaQuery = criteriaBuilder.createQuery(Exercise.class);
-        List<Predicate> andPredicates = new ArrayList<>();
+        if(Objects.nonNull(paginacaoRequest.getSearchText())){
+            andPredicates.add(criteriaBuilder.like(from.get("nome"), "%"+paginacaoRequest.getSearchText()+"%"));
+        }
 
-        Root<Exercise> from = criteriaQuery.from(Exercise.class);
         criteriaQuery = criteriaQuery.select(from).where(andPredicates.toArray(new Predicate[0]));
         List<Order> orderList = new ArrayList<>();
         orderList.add(criteriaBuilder.asc(from.get("name")));
@@ -68,6 +79,16 @@ public class ExerciseService extends AbstractServiceRepo<ExerciseRepository, Exe
     }
 
     public List<Exercise> findExercisesForRandomRoutine(CreateRandomExerciseRoutineRequestDTO exerciseFilters){
+        CriteriaResultDTO result = getBaseCriteria(exerciseFilters);
+        CriteriaQuery<Exercise> criteriaQuery;
+
+        criteriaQuery = result.getCriteriaQuery().select(result.getFrom()).where(result.getAndPredicates().toArray(new Predicate[0]));
+        TypedQuery<Exercise> query = em.createQuery(criteriaQuery);
+
+        return query.getResultList();
+    }
+
+    private CriteriaResultDTO getBaseCriteria(CreateRandomExerciseRoutineRequestDTO exerciseFilters) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Exercise> criteriaQuery = criteriaBuilder.createQuery(Exercise.class);
         List<Predicate> andPredicates = new ArrayList<>();
@@ -89,10 +110,7 @@ public class ExerciseService extends AbstractServiceRepo<ExerciseRepository, Exe
             andPredicates.add(criteriaBuilder.equal(joinExerciseEquipmentType.get("equipmentTypeId"), exerciseFilters.getEquipmentTypeId()));
         }
 
-        criteriaQuery = criteriaQuery.select(from).where(andPredicates.toArray(new Predicate[0]));
-        TypedQuery<Exercise> query = em.createQuery(criteriaQuery);
-
-        return query.getResultList();
+        return new CriteriaResultDTO(criteriaQuery, andPredicates, from, criteriaBuilder);
     }
     public Exercise findExerciseById(Long exerciseId) throws ApiErrorException {
         return repository.findById(exerciseId).orElseThrow(() -> new ApiErrorException(HttpStatus.BAD_REQUEST, MessageEnum.EXERCISE_NOT_FOUND));

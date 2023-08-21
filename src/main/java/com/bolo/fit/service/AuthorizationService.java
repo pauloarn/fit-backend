@@ -4,6 +4,7 @@ import com.bolo.fit.exceptions.ApiErrorException;
 import com.bolo.fit.model.User;
 import com.bolo.fit.service.dto.request.CreateSessionRequestDTO;
 import com.bolo.fit.service.dto.response.SessionResponseDTO;
+import com.bolo.fit.service.dto.response.UserDetailResponseDTO;
 import com.bolo.fit.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,6 +32,10 @@ public class AuthorizationService implements UserDetailsService {
         } catch (ApiErrorException e) {
             throw new UsernameNotFoundException("User not found");
         }
+    }
+
+    public UserDetailResponseDTO getLoggerUserDTO(){
+        return new UserDetailResponseDTO(userService.getLoggedUser());
     }
 
     public SessionResponseDTO createSession(CreateSessionRequestDTO createSessionRequestDTO) throws ApiErrorException {
