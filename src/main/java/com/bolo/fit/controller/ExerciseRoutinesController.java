@@ -24,7 +24,7 @@ public class ExerciseRoutinesController {
     @GetMapping()
     private Response<Page<ExerciseRoutinePaginatedResponseDTO>> listExerciseRoutines(
             @RequestParam(value = "page", defaultValue = "1") Integer page,
-            @RequestParam(value = "size", defaultValue = "10") Integer size
+            @RequestParam(value = "size", defaultValue = "50000") Integer size
     ) throws IOException {
         Response<Page<ExerciseRoutinePaginatedResponseDTO>> response = new Response<>();
         DadosExercicioPaginacaoDTO paginacaoRequestData = new DadosExercicioPaginacaoDTO();
@@ -69,5 +69,12 @@ public class ExerciseRoutinesController {
         Response<ExerciseRoutineResponseDTO> response = new Response<>();
         response.setOk().setData(exerciseRoutineService.createExerciseRoutine(createExerciseRoutineRequest));
         return response;
+    }
+
+    @DeleteMapping("/{id}")
+    private Response<Void> deleteRoutine(@PathVariable("id") Long exerciseRoutineId) throws ApiErrorException{
+        Response<Void> response = new Response<>();
+        exerciseRoutineService.deleteExerciseRoutine(exerciseRoutineId);
+        return  response;
     }
 }

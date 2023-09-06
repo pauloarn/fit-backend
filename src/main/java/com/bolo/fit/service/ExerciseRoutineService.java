@@ -43,7 +43,10 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
         Pageable pageable = generatePageable(page, sizePage);
         log.info("Buscando os exercicios");
         List<ExerciseRoutine> listaExercises = loggedUser.getListExerciseRoutine();
-        List<ExerciseRoutinePaginatedResponseDTO> resultDTO = listaExercises.stream().map(ExerciseRoutinePaginatedResponseDTO::new).collect(Collectors.toList());
+        List<ExerciseRoutinePaginatedResponseDTO> resultDTO = listaExercises.stream()
+                .filter(ExerciseRoutine::getIsVisible)
+                .map(ExerciseRoutinePaginatedResponseDTO::new)
+                .collect(Collectors.toList());
         return new PageImpl<>(resultDTO, pageable, listaExercises.size());
     }
 
@@ -110,6 +113,12 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
         ExerciseRoutine er = repository.save(routine);
         log.info("Exercise Routine Created");
         return new ExerciseRoutineResponseDTO(er, true);
+    }
+
+    public void deleteExerciseRoutine(Long exerciseRoutineId) throws ApiErrorException {
+        ExerciseRoutine routine = repository.findById(exerciseRoutineId).orElseThrow(() -> new ApiErrorException(HttpStatus.BAD_REQUEST, MessageEnum.ROUTINE_NOT_FOUND));
+        routine.setIsVisible(false);
+        repository.save(routine);
     }
 
     public ExerciseRoutineResponseDTO updateExerciseRoutine(Long routineId, UpdateExerciseRoutineRequestDTO routineRequestDTO) throws ApiErrorException {

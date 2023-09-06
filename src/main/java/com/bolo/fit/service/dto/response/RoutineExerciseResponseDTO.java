@@ -14,6 +14,7 @@ public class RoutineExerciseResponseDTO {
     private Integer series;
     private Integer repetitions;
     private String observation;
+    private Double exerciseWeight;
     private Double restTime;
     private ExerciseResponseDTO execise;
     private List<ExerciseResponseDTO> biSetExercises;
@@ -23,6 +24,7 @@ public class RoutineExerciseResponseDTO {
         this.repetitions = routineExercise.getRepetitions();
         this.observation = routineExercise.getNotes();
         this.restTime = routineExercise.getRest_time();
+        this.exerciseWeight = routineExercise.getExerciseWeight();
         this.execise = new ExerciseResponseDTO(routineExercise.getExercise(), shouldGetImageData);
         List<ExerciseResponseDTO> listAux = new ArrayList<>();
         for(Exercise ex: routineExercise.getSecondaryExercisesList()){

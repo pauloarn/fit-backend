@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -36,6 +37,9 @@ public class ExerciseRoutineExercise extends BaseEntity{
     @Column(name="notes")
     private String notes;
 
+    @Column(name="exerciseweight")
+    private Double exerciseWeight;
+
     @ManyToOne()
     @JoinColumn(name = "exercise_routine_id")
     private ExerciseRoutine exerciseRoutine;
@@ -52,5 +56,5 @@ public class ExerciseRoutineExercise extends BaseEntity{
             catalog = Catalog.FIT_DATA_BASE,
             schema = Schema.FitApp
     )
-    private List<Exercise> secondaryExercisesList;
+    private List<Exercise> secondaryExercisesList = new ArrayList<>();
 }

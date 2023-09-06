@@ -1,0 +1,1 @@
+alter table fitapp.exercise_routine_exercise add exerciseWeight float8;
