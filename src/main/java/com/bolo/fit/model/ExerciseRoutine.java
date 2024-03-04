@@ -43,7 +43,7 @@ public class ExerciseRoutine extends BaseEntity {
     @Column(name="isVisible")
     private Boolean isVisible;
 
-    @OneToMany(mappedBy = "exerciseRoutine", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "exerciseRoutine", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ExerciseRoutineExercise> exerciseRoutineExercise;
 
     @ManyToOne()

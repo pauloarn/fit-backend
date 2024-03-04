@@ -51,7 +51,7 @@ public class ExerciseService extends AbstractServiceRepo<ExerciseRepository, Exe
 
         criteriaQuery = criteriaQuery.select(from).where(andPredicates.toArray(new Predicate[0]));
         List<Order> orderList = new ArrayList<>();
-        orderList.add(criteriaBuilder.asc(from.get("name")));
+        orderList.add(criteriaBuilder.asc(from.get("nome")));
         criteriaQuery.orderBy(orderList.toArray(new Order[0]));
         TypedQuery<Exercise> query = em.createQuery(criteriaQuery);
         CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);

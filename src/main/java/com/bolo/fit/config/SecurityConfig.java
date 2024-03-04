@@ -1,6 +1,5 @@
 package com.bolo.fit.config;
 
-import com.bolo.fit.enums.RoleEnum;
 import com.bolo.fit.filters.AuthFilter;
 import com.bolo.fit.filters.LogFilter;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeHttpRequests(auth ->
                          auth
                             .antMatchers("/session").permitAll()
-                            .antMatchers("/user").hasAnyRole(RoleEnum.ADMIN.toString(), RoleEnum.PERSONAL_TRAINER.toString())
+                            .antMatchers("/user").permitAll()
+//                            .antMatchers("/user").hasAnyRole(RoleEnum.ADMIN.toString(), RoleEnum.PERSONAL_TRAINER.toString())
                             .anyRequest().authenticated()
             )
             .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)

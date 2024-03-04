@@ -5,6 +5,7 @@ import com.bolo.fit.exceptions.ApiErrorException;
 import com.bolo.fit.model.BodyPart;
 import com.bolo.fit.repository.BodyPartRepository;
 import com.bolo.fit.service.dto.response.BodyPartResponseDTO;
+import com.bolo.fit.utils.StringUtils;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,8 @@ public class BodyPartService extends AbstractServiceRepo<BodyPartRepository, Bod
     public List<BodyPartResponseDTO> getAllBodyParts() {
         List<BodyPart> bodyParts = repository.findAll();
         log.info("Searching all body parts");
+
+        bodyParts.sort((bodyPartLeft, bodyPartRight) -> StringUtils.compararStringIgnorandoAcentuacao(bodyPartLeft.getNome(), bodyPartRight.getNome()));
         return bodyParts.stream().map((bp) -> new BodyPartResponseDTO().fromBodyPart(bp)).collect(Collectors.toList());
     }
     public BodyPart getExerciseTypeById(Long exerciseTypeId) throws ApiErrorException {

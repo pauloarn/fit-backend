@@ -1,0 +1,1 @@
+alter table fitapp.exercises add exerciseBase64 text;

@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.IOException;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -53,9 +54,16 @@ public class Exercise extends BaseEntity {
     @JoinColumn(name = "exercisetype_fk")
     private ExerciseType exerciseType;
 
+    @Column(name="exercisebase64")
+    private String exerciseImageBase64;
+
     public ImageBase64ResponseDTO getExerciseGifData () throws IOException {
         ImageBase64ResponseDTO imageData = new ImageBase64ResponseDTO();
-        imageData.setImageBase64(ExercisesGifUtils.getGifBase64(this.getGifUrl()));
+        if(Objects.isNull(this.exerciseImageBase64)){
+            imageData.setImageBase64(ExercisesGifUtils.getGifBase64(this.getGifUrl()));
+        }else{
+            imageData.setImageBase64(this.exerciseImageBase64);
+        }
         imageData.setImageType("gif");
         return imageData;
     }

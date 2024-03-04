@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -143,9 +144,11 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
         for (ExerciseRoutineExerciseRequestDTO ex : routineRequestDTO) {
             ExerciseRoutineExercise ere = new ExerciseRoutineExercise();
             List<Exercise> exerciseList = new ArrayList<>();
-            for(Long exerciseId : ex.getBiSetExercises()){
-                Exercise exrcise = exerciseService.findExerciseById(exerciseId);
-                exerciseList.add(exrcise);
+            if(Objects.nonNull(ex.getBiSetExercises())){
+                for(Long exerciseId : ex.getBiSetExercises()){
+                    Exercise exrcise = exerciseService.findExerciseById(exerciseId);
+                    exerciseList.add(exrcise);
+                }
             }
             Exercise exr = exerciseService.findExerciseById(ex.getExerciseId());
             ere.setSeries(ex.getSeries());

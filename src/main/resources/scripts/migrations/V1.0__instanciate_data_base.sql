@@ -1,4 +1,4 @@
-create schema FitApp;
+-- create schema FitApp;
 
 CREATE SEQUENCE fitapp.idbodypart_id_seq;
 CREATE SEQUENCE fitapp.idequipment_type_id_seq;

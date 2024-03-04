@@ -6,11 +6,16 @@ fit:
   log:
     level: DEBUG
   database:
-    name: FitDataBase
-    userName: root
-    password: fitAppStrong@123
+    name: fitdatabase
+    #render base
+    userName: ademiro
+    password: sFxxWWo39zLNlXNcF7KpDtey6N0LbUfM
+    host: dpg-cnj2nbun7f5s73crapr0-a.oregon-postgres.render.com
+    #local base
+#    userName: root
+#    password: fitAppStrong@123
+#    host: localhost
     ddlAuto: validate
-    host: localhost
     port: 5432
     showSql: false
 
@@ -43,6 +48,12 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: ${fit.database.showSql}
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+    schemas: fitapp
+    locations: filesystem:src/main/resources/scripts/migrations
+    user: ${fit.database.username}
+    password: ${fit.database.password}
   web:
     locale: pt_BR
     resources:

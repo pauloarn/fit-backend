@@ -4,7 +4,6 @@ import com.bolo.fit.service.ExerciseService;
 import com.bolo.fit.service.dto.request.DadosExercicioPaginacaoDTO;
 import com.bolo.fit.service.dto.response.ExerciseResponseDTO;
 import com.bolo.fit.service.dto.response.Response;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +25,7 @@ public class ExercisesController {
     private Response<Page<ExerciseResponseDTO>> listaExercicios(
             @RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size,
-            @RequestParam(value = "getBase64", defaultValue = "false") String getBase64,
+            @RequestParam(value = "getBase64", defaultValue = "true") String getBase64,
             @RequestParam(value = "searchText", required = false) String searchText,
             @RequestParam(value="bodyPartId", required = false) Long bodyPartId,
             @RequestParam(value="equipmentTypeId", required = false) Long equipmentTypeId,
