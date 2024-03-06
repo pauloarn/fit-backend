@@ -48,3 +48,5 @@ build/
 
 .idea
 /src/main/resources/scripts/migrations/V2.1__exercises_seed.sql
+fit_app_kp.pem
+*.pem

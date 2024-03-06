@@ -15,6 +15,7 @@ services:
     ports:
       - '8285:8285'
     environment:
+      - JVM_OPTS=-Xmx2g -Xms2g -XX:MaxPermSize=2048m
       - DB_NAME=FitDataBase
       - DB_CONNECTION_USER_NAME=root
       - DB_CONNECTION_PASSWORD=fitAppStrong@123
@@ -28,7 +29,6 @@ services:
     ports:
       - '5432:5432'
     environment:
-      - JVM_OPTS=-Xmx1.5g
       - POSTGRES_DB=FitDataBase
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=fitAppStrong@123
