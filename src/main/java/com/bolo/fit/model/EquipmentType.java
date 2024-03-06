@@ -31,6 +31,6 @@ public class EquipmentType extends BaseEntity {
     @Column(name = "nome")
     private String nome;
 
-    @OneToMany(mappedBy = "equipmentType", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "equipmentType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Exercise> exercise;
 }

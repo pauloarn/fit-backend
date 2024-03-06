@@ -31,6 +31,6 @@ public class BodyPart extends BaseEntity {
     @Column(name = "nome")
     private String nome;
 
-    @OneToMany(mappedBy = "bodyPart", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bodyPart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Exercise> exercise;
 }

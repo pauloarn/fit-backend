@@ -21,7 +21,7 @@ public class EquipmentTypeService extends AbstractServiceRepo<EquipmentTypeRepos
     }
     public List<EquipmentTypeResponseDTO> getAllEquipmentTypes() {
         List<EquipmentType> equipmentTypes = repository.findAll();
-        log.info("Searching all body parts");
+        log.info("Searching all equipment types");
         equipmentTypes.sort((equipmentTypeLeft,equipmentTypeRight) -> StringUtils.compararStringIgnorandoAcentuacao(equipmentTypeLeft.getNome(), equipmentTypeRight.getNome()));
         return equipmentTypes.stream().map((et)-> new EquipmentTypeResponseDTO().fromEquipmentType(et)).collect(Collectors.toList());
     }

@@ -22,7 +22,7 @@ public class ExerciseTypeService extends AbstractServiceRepo<ExerciseTypeReposit
 
     public List<ExerciseTypeResponseDTO> getAllExerciseTypes() {
         List<ExerciseType> exerciseTypes = repository.findAll();
-        log.info("Searching all body parts");
+        log.info("Searching all exercise types");
         exerciseTypes.sort((exerciseLeft, exerciseRight) -> StringUtils.compararStringIgnorandoAcentuacao(exerciseLeft.getNome(), exerciseRight.getNome()));
         return exerciseTypes.stream().map((et)-> new ExerciseTypeResponseDTO().fromExerciseType(et)).collect(Collectors.toList());
     }
