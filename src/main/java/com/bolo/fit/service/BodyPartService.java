@@ -23,7 +23,6 @@ public class BodyPartService extends AbstractServiceRepo<BodyPartRepository, Bod
     public List<BodyPartResponseDTO> getAllBodyParts() {
         List<BodyPart> bodyParts = repository.findAll();
         log.info("Searching all body parts");
-
         bodyParts.sort((bodyPartLeft, bodyPartRight) -> StringUtils.compararStringIgnorandoAcentuacao(bodyPartLeft.getNome(), bodyPartRight.getNome()));
         return bodyParts.stream().map((bp) -> new BodyPartResponseDTO().fromBodyPart(bp)).collect(Collectors.toList());
     }

@@ -8,20 +8,20 @@ networks:
     name: fit_net
 
 services:
-  fit_service:
-    container_name: fitApp_service
-    image: fitapp
-    restart: no
-    ports:
-      - '8285:8285'
-    environment:
-      - JVM_OPTS=-Xmx2g -Xms2g -XX:MaxPermSize=2048m
-      - DB_NAME=FitDataBase
-      - DB_CONNECTION_USER_NAME=root
-      - DB_CONNECTION_PASSWORD=fitAppStrong@123
-      - DB_CONNECTION_HOST=192.168.0.26
-    networks:
-      - fit_net
+#  fit_service:
+#    container_name: fitApp_service
+#    image: fitapp
+#    restart: no
+#    ports:
+#      - '8285:8285'
+#    environment:
+#      - JVM_OPTS=-Xmx2g -Xms2g -XX:MaxPermSize=2048m
+#      - DB_NAME=FitDataBase
+#      - DB_CONNECTION_USER_NAME=root
+#      - DB_CONNECTION_PASSWORD=fitAppStrong@123
+#      - DB_CONNECTION_HOST=192.168.0.26
+#    networks:
+#      - fit_net
   fit_db:
     container_name: fitApp_db
     image: postgres:14-alpine

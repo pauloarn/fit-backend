@@ -10,7 +10,7 @@ public class EquipmentTypeResponseDTO extends BaseStatsBaseResponseDTO{
         bp.setNome(equipmentType.getNome());
         bp.setId(equipmentType.getEquipmentTypeId());
         bp.setCreatedAt(equipmentType.getCreatedAt());
-        bp.setExercises(equipmentType.getExercise().size());
+        bp.setExercises(equipmentType.getExerciseCount());
         return bp;
     }
 }

@@ -15,7 +15,7 @@ public class BodyPartResponseDTO extends BaseStatsBaseResponseDTO{
         bp.setNome(bodyPart.getNome());
         bp.setId(bodyPart.getBodyPartId());
         bp.setCreatedAt(bodyPart.getCreatedAt());
-        bp.setExercises(bodyPart.getExercise().size());
+        bp.setExercises(bodyPart.getExerciseCount());
         return bp;
     }
 }

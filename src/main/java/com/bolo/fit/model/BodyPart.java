@@ -31,6 +31,9 @@ public class BodyPart extends BaseEntity {
     @Column(name = "nome")
     private String nome;
 
+    @Column(name = "exercises_count")
+    private Integer exerciseCount;
+
     @OneToMany(mappedBy = "bodyPart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Exercise> exercise;
 }
