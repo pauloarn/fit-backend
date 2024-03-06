@@ -48,7 +48,7 @@ public class ExerciseRoutineExercise extends BaseEntity{
     @JoinColumn(name="exercise_id")
     private Exercise exercise;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "bi_set_routine_relation",
             joinColumns= @JoinColumn(name="bi_set_main_exercise_routine_exercise_fk"),

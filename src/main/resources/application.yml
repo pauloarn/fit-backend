@@ -44,7 +44,7 @@ spring:
     show-sql: ${fit.database.showSql}
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   flyway:
-    enabled: false
+    enabled: true
     schemas: fitapp
     locations: filesystem:src/main/resources/scripts/migrations
     user: ${fit.database.username}

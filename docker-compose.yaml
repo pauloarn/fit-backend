@@ -1,24 +1,38 @@
 version: '3.7'
 
 volumes:
-  tks_pg_vol:
+  fit_app_vol:
 
 networks:
-  thanks_net:
-    name: thanks_net
+  fit_net:
+    name: fit_net
 
 services:
-  thanks_db:
+  fit_service:
+    container_name: fitApp_service
+    image: fitapp
+    restart: no
+    ports:
+      - '8285:8285'
+    environment:
+      - DB_NAME=FitDataBase
+      - DB_CONNECTION_USER_NAME=root
+      - DB_CONNECTION_PASSWORD=fitAppStrong@123
+      - DB_CONNECTION_HOST=192.168.0.26
+    networks:
+      - fit_net
+  fit_db:
     container_name: fitApp_db
     image: postgres:14-alpine
-    restart: always
+    restart: no
     ports:
       - '5432:5432'
     environment:
+      - JVM_OPTS=-Xmx1.5g
       - POSTGRES_DB=FitDataBase
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=fitAppStrong@123
     networks:
-      - thanks_net
+      - fit_net
     volumes:
-      - tks_pg_vol:/var/lib/postgresql/data
+      - fit_app_vol:/var/lib/postgresql/data
