@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  fit_service:
+    container_name: fitApp_service
+    image: dakkee/fitapp
+    restart: no
+    ports:
+      - '8285:8285'
+    environment:
+      - RUN_FLYWAY=false
+      - DB_NAME=FitDataBase
+      - DB_CONNECTION_USER_NAME=root
+      - DB_CONNECTION_PASSWORD=fitAppStrong@123
+      - DB_CONNECTION_HOST=192.168.0.26

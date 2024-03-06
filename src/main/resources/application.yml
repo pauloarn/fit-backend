@@ -7,12 +7,13 @@ fit:
     level: DEBUG
   database:
     name: ${DB_NAME}
-    userName: ${DB_CONNECTION_USER_NAME}
+    username: ${DB_CONNECTION_USER_NAME}
     password: ${DB_CONNECTION_PASSWORD}
     host: ${DB_CONNECTION_HOST}
     ddlAuto: validate
     port: 5432
     showSql: false
+    enableFlyway: ${RUN_FLYWAY}
 
 spring:
   output:
@@ -44,7 +45,7 @@ spring:
     show-sql: ${fit.database.showSql}
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   flyway:
-    enabled: true
+    enabled: ${fit.database.enableFlyway}
     schemas: fitapp
     locations: filesystem:src/main/resources/scripts/migrations
     user: ${fit.database.username}

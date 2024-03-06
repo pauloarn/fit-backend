@@ -23,3 +23,12 @@ jobs:
         run: docker build -t ${{secrets.DOCKER_USERNAME}}/fitapp .
       - name: Push Image Docker
         run: docker push ${{secrets.DOCKER_USERNAME}}/fitapp
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull image from dockerhub
+        run: docker pull ${{secrets.DOCKER_USERNAME}}/fitapp
+      - name: Run docker container
+        run : docker compose -f docker-compose-prod.yaml up -d
