@@ -20,6 +20,6 @@ jobs:
       - name: Login Docker Hub
         run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}} docker.io
       - name: Build Docker Image
-        run: docker build -t pauloarn/fitapp .
+        run: docker build -t dakkee/fitapp .
       - name: Push Image Docker
         run: docker push pauloarn/fitapp
