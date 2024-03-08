@@ -3,7 +3,7 @@ FROM ubuntu as build
 RUN apt-get update
 RUN apt-get install openjdk-11-jdk -y
 
-@@ -9,8 +9,9 @@ RUN mvn clean install
+RUN mvn clean install
 
 FROM openjdk:17-jdk-slim
 
