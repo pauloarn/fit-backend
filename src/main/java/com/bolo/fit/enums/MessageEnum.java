@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 public enum MessageEnum {
     REQUISICAO_CONCLUIDA("message.api.requisicao_concluida"),
     EXERCISE_NOT_FOUND("message.api.exercise.not.found"),
+    ACESSO_NEGADO("message.api.acesso.negado"),
     ROUTE_NOT_FOUND("message.api.rout.not.found"),
     ENDPOINT_ERROR("message.api.endpoint.error"),
     VALIDATION_ERROR("message.api.validacao.error"),

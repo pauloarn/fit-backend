@@ -1,5 +1,6 @@
 package com.bolo.fit.config;
 
+import com.bolo.fit.controller.handler.CustomAccessDeniedHandler;
 import com.bolo.fit.filters.AuthFilter;
 import com.bolo.fit.filters.LogFilter;
 import lombok.RequiredArgsConstructor;
@@ -21,14 +22,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final LogFilter loggerFilter;
     private final AuthFilter authFilter;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .csrf().disable()
             .cors().disable()
+            .httpBasic().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .authorizeHttpRequests(auth ->
+            .authorizeRequests(auth ->
                          auth
                             .antMatchers("/session").permitAll()
                             .antMatchers("/user").permitAll()
@@ -36,7 +39,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             .anyRequest().authenticated()
             )
             .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
-            .addFilterBefore(loggerFilter, AuthFilter.class);
+            .addFilterBefore(loggerFilter, AuthFilter.class)
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and().exceptionHandling()
+            .accessDeniedHandler(customAccessDeniedHandler);
     }
 
     @Bean
