@@ -42,15 +42,15 @@ public class Exercise extends BaseEntity {
     @Column(name = "nome")
     private String nome;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bodypart_fk")
     private BodyPart bodyPart;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "equipmenttype_fk")
     private EquipmentType equipmentType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exercisetype_fk")
     private ExerciseType exerciseType;
 

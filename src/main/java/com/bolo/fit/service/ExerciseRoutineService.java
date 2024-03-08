@@ -67,11 +67,13 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
             throw new ApiErrorException(HttpStatus.BAD_REQUEST, MessageEnum.EXERCISE_NOT_FOUND);
         }
         for (int i = 0; i < createRandomExerciseRoutine.getAmountOfExercises() ; i++) {
-            Exercise currentExercise = selectedExercises.get(RandomUtils.selectNumberInRange(selectedExercises.size()));
-                if(filteredExercises.contains(currentExercise)){
-                    continue;
-                }
-                filteredExercises.add(selectedExercises.get(RandomUtils.selectNumberInRange(selectedExercises.size())));
+            var randomNumber = RandomUtils.selectNumberInRange(selectedExercises.size());
+            if(selectedExercises.isEmpty()){
+                break;
+            }
+            Exercise currentExercise = selectedExercises.get(randomNumber);
+            filteredExercises.add(currentExercise);
+            selectedExercises.remove(currentExercise);
         }
         ExerciseRoutine routine = new ExerciseRoutine();
         routine.setUser(loggedUser);
