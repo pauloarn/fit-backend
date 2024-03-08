@@ -5,7 +5,7 @@ RUN apt-get install openjdk-11-jdk -y
 
 RUN mvn clean install
 
-FROM openjdk:17-jdk-slim
+FROM openjdk:11-jdk-slim
 
 EXPOSE 8285
 
