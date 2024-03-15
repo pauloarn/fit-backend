@@ -16,8 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 public class CriteriaResultDTO {
 
-  private  CriteriaQuery<Exercise> criteriaQuery;
-  private  List<Predicate> andPredicates;
-  private   Root<Exercise> from;
+  private CriteriaQuery<Exercise> criteriaQuery;
+  private List<Predicate> andPredicates;
+  private Root<Exercise> from;
   private CriteriaBuilder criteriaBuilder;
+  private CriteriaQuery<Exercise> originalQuery;
 }

@@ -6,10 +6,7 @@ import com.bolo.fit.service.dto.request.CreateUserRequestDTO;
 import com.bolo.fit.service.dto.response.Response;
 import com.bolo.fit.service.dto.response.UserDetailResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -19,6 +16,15 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @GetMapping("/me")
+    public Response<UserDetailResponseDTO> getLoggedUserData(
+    ){
+        Response<UserDetailResponseDTO> response = new Response<>();
+        response.setOk();
+        response.setData(userService.getUserInfo());
+        return response;
+    }
 
     @PostMapping()
     public Response<UserDetailResponseDTO> createUser(

@@ -8,7 +8,7 @@ public class ExerciseTypeResponseDTO extends BaseStatsBaseResponseDTO{
         ExerciseTypeResponseDTO bp = new ExerciseTypeResponseDTO();
         bp.setName(exerciseType.getName());
         bp.setNome(exerciseType.getNome());
-        bp.setId(exerciseType.getExeciseId());
+        bp.setId(exerciseType.getExeciseTypeId());
         bp.setCreatedAt(exerciseType.getCreatedAt());
         bp.setExercises(exerciseType.getExerciseCount());
         return bp;

@@ -18,9 +18,14 @@ import java.util.Optional;
 @Service
 @Log4j2
 public class UserService extends AbstractServiceRepo<UserRepository, User, Long> {
-
     public UserService(UserRepository repository) {
         super(repository);
+    }
+
+    public UserDetailResponseDTO getUserInfo () {
+        User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return new UserDetailResponseDTO(loggedUser);
     }
 
     public User findUserByEmail(String userEmail) throws ApiErrorException {
