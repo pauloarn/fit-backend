@@ -6,17 +6,16 @@ import com.bolo.fit.service.dto.request.CreateSessionRequestDTO;
 import com.bolo.fit.service.dto.response.Response;
 import com.bolo.fit.service.dto.response.SessionResponseDTO;
 import com.bolo.fit.service.dto.response.UserDetailResponseDTO;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("session")
+@RequiredArgsConstructor
 public class SessionController {
-    @Autowired
-    AuthorizationService authorizationService;
+    private final AuthorizationService authorizationService;
+
     @PostMapping()
     public Response<SessionResponseDTO> createSession(
             @RequestBody @Valid CreateSessionRequestDTO createSessionRequestDTO

@@ -6,24 +6,26 @@ import com.bolo.fit.service.dto.request.CreateSessionRequestDTO;
 import com.bolo.fit.service.dto.response.SessionResponseDTO;
 import com.bolo.fit.service.dto.response.UserDetailResponseDTO;
 import com.bolo.fit.utils.TokenUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class AuthorizationService implements UserDetailsService {
 
+    // TODO: adicionado o Lazy por problema de dependência circular. Necessário refatorar!!!
+    @Lazy
     @Autowired
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    TokenUtils tokenUtils;
+    private final UserService userService;
+    private final TokenUtils tokenUtils;
 
     @Override
     public User loadUserByUsername(String s) throws UsernameNotFoundException {

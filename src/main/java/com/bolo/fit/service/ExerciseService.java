@@ -11,6 +11,8 @@ import com.bolo.fit.service.dto.CriteriaResultDTO;
 import com.bolo.fit.service.dto.request.CreateRandomExerciseRoutineRequestDTO;
 import com.bolo.fit.service.dto.request.DadosExercicioPaginacaoDTO;
 import com.bolo.fit.service.dto.response.ExerciseResponseDTO;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -18,8 +20,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

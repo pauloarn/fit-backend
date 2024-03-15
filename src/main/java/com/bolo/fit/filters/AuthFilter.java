@@ -5,19 +5,21 @@ import com.bolo.fit.exceptions.ApiErrorException;
 import com.bolo.fit.model.User;
 import com.bolo.fit.service.UserService;
 import com.bolo.fit.utils.TokenUtils;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 @Component
@@ -25,11 +27,8 @@ import java.util.Objects;
 @Log4j2
 public class AuthFilter extends OncePerRequestFilter {
 
-    @Autowired
-    TokenUtils tokenUtils;
-
-    @Autowired
-    UserService userService;
+    private final TokenUtils tokenUtils;
+    private final UserService userService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -51,6 +50,22 @@ public class AuthFilter extends OncePerRequestFilter {
                 throw new RuntimeException(MessageEnum.INVALID_TOKEN.getMessage());
             }
         }
+    }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        var routeMap = new HashMap<String, List<HttpMethod>>();
+
+        routeMap.put("/session", List.of(HttpMethod.POST));
+
+        var path = request.getRequestURI().replace("/fit-app", "");
+        var method = request.getMethod();
+
+        if (routeMap.containsKey(path)) {
+            return routeMap.get(path).contains(HttpMethod.valueOf(method));
+        }
+
+        return false;
     }
 
     private String recoverToken(HttpServletRequest request){

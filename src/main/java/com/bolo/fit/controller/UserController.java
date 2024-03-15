@@ -5,20 +5,19 @@ import com.bolo.fit.service.UserService;
 import com.bolo.fit.service.dto.request.CreateUserRequestDTO;
 import com.bolo.fit.service.dto.response.Response;
 import com.bolo.fit.service.dto.response.UserDetailResponseDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-
 @RestController
 @RequestMapping("user")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
 
     @PostMapping()
     public Response<UserDetailResponseDTO> createUser(

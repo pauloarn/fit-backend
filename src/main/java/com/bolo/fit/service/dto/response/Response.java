@@ -3,6 +3,7 @@ package com.bolo.fit.service.dto.response;
 import com.bolo.fit.enums.MessageEnum;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 
 import java.io.Serializable;
 
@@ -13,14 +14,14 @@ public class Response<D> implements Serializable {
     private String message;
     D body;
 
-    public Response<D> setStatusCode(HttpStatus httpStatus, MessageEnum messageApiEnum) {
+    public Response<D> setStatusCode(HttpStatusCode httpStatus, MessageEnum messageApiEnum) {
         this.statusCode = httpStatus.value();
         this.messageCode = messageApiEnum.name();
         this.message = messageApiEnum.getMessage();
         return this;
     }
 
-    public Response<D> setStatusCode(HttpStatus httpStatus, String messageApiEnum, String message) {
+    public Response<D> setStatusCode(HttpStatusCode httpStatus, String messageApiEnum, String message) {
         this.statusCode = httpStatus.value();
         this.messageCode = messageApiEnum;
         this.message = message;

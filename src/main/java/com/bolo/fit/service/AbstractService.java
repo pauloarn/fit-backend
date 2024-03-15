@@ -3,6 +3,8 @@ package com.bolo.fit.service;
 import com.bolo.fit.enums.MessageEnum;
 import com.bolo.fit.exceptions.ApiErrorException;
 import com.bolo.fit.utils.JsonUtils;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -13,18 +15,11 @@ import org.springframework.http.HttpStatus;
 
 import static com.bolo.fit.utils.ExceptionUtils.logException;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.Objects;
 import java.util.function.Supplier;
 
 @Log4j2
 public abstract class AbstractService {
-
-
-    @Autowired
-    public ApplicationEventPublisher publisher;
-
     private JsonUtils jsonUtils;
 
     @PersistenceContext

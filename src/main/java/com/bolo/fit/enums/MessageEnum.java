@@ -5,7 +5,7 @@ import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 public enum MessageEnum {
-    REQUISICAO_CONCLUIDA("message.api.requisicao_concluida"),
+    REQUISICAO_CONCLUIDA("message.api.requisicao.concluida"),
     EXERCISE_NOT_FOUND("message.api.exercise.not.found"),
     ACESSO_NEGADO("message.api.acesso.negado"),
     ROUTE_NOT_FOUND("message.api.rout.not.found"),
@@ -36,18 +36,7 @@ public enum MessageEnum {
     }
 
     public String getMessage(String... args) {
-        String msg = convertToUTF8(resourceBundle.getString(this.description));
-        if (msg.contains("�")) {
-            msg = resourceBundle.getString(this.description);
-        }
+        String msg = resourceBundle.getString(this.description);
         return args == null ? msg : MessageFormat.format(msg, args);
-    }
-
-    private static String convertToUTF8(String message) {
-        try {
-            return new String(message.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
-        } catch (Exception e) {
-            return message;
-        }
     }
 }

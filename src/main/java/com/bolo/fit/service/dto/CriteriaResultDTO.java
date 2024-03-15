@@ -1,14 +1,14 @@
 package com.bolo.fit.service.dto;
 
 import com.bolo.fit.model.Exercise;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Getter
@@ -16,8 +16,8 @@ import java.util.List;
 @AllArgsConstructor
 public class CriteriaResultDTO {
 
-  private  CriteriaQuery<Exercise> criteriaQuery;
-  private  List<Predicate> andPredicates;
-  private   Root<Exercise> from;
-  private CriteriaBuilder criteriaBuilder;
+    private CriteriaQuery<Exercise> criteriaQuery;
+    private List<Predicate> andPredicates;
+    private Root<Exercise> from;
+    private CriteriaBuilder criteriaBuilder;
 }

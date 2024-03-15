@@ -6,14 +6,14 @@ fit:
   log:
     level: DEBUG
   database:
-    name: ${DB_NAME}
+    name: ${DB_NAME:FitDataBase}
     username: ${DB_CONNECTION_USER_NAME}
     password: ${DB_CONNECTION_PASSWORD}
-    host: ${DB_CONNECTION_HOST}
+    host: ${DB_CONNECTION_HOST:localhost}
     ddlAuto: validate
     port: 5432
     showSql: false
-    enableFlyway: ${RUN_FLYWAY}
+    enableFlyway: ${RUN_FLYWAY:false}
 
 spring:
   output:
