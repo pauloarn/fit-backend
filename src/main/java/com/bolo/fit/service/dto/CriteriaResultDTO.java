@@ -20,4 +20,5 @@ public class CriteriaResultDTO {
     private List<Predicate> andPredicates;
     private Root<Exercise> from;
     private CriteriaBuilder criteriaBuilder;
+    private CriteriaQuery<Exercise> originalQuery;
 }

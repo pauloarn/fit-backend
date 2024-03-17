@@ -28,91 +28,94 @@ import java.util.Objects;
 @Service
 @Log4j2
 public class ExerciseService extends AbstractServiceRepo<ExerciseRepository, Exercise, Long> {
-    public ExerciseService(ExerciseRepository repository) {
-        super(repository);
+  public ExerciseService(ExerciseRepository repository) {
+    super(repository);
+  }
+
+  public Page<ExerciseResponseDTO> buscaTodosExercicios(DadosExercicioPaginacaoDTO paginacaoRequest) throws IOException {
+    CreateRandomExerciseRoutineRequestDTO baseDto = CreateRandomExerciseRoutineRequestDTO.fromSearch(
+        paginacaoRequest.getBodyPartId(),
+        paginacaoRequest.getExerciseTypeId(),
+        paginacaoRequest.getEquipmentTypeId(),
+        null
+    );
+    CriteriaResultDTO baseCriteria = getBaseCriteria(baseDto);
+    var andPredicates = baseCriteria.getAndPredicates();
+    var criteriaBuilder = baseCriteria.getCriteriaBuilder();
+    var criteriaQuery = baseCriteria.getCriteriaQuery();
+    var from = baseCriteria.getFrom();
+    if (Objects.isNull(paginacaoRequest.getBodyPartId()) && Objects.isNull(paginacaoRequest.getExerciseTypeId()) && Objects.isNull(paginacaoRequest.getEquipmentTypeId())) {
+      criteriaQuery = criteriaQuery.select(from).where(andPredicates.toArray(new Predicate[0]));
     }
 
-    public Page<ExerciseResponseDTO> buscaTodosExercicios(DadosExercicioPaginacaoDTO paginacaoRequest) throws IOException {
-        CreateRandomExerciseRoutineRequestDTO baseDto = new CreateRandomExerciseRoutineRequestDTO(
-                paginacaoRequest.getBodyPartId(),
-                paginacaoRequest.getExerciseTypeId(),
-                paginacaoRequest.getEquipmentTypeId(),
-                null
-        );
-        CriteriaResultDTO baseCriteria = getBaseCriteria(baseDto);
-        var andPredicates = baseCriteria.getAndPredicates();
-        var criteriaBuilder = baseCriteria.getCriteriaBuilder();
-        var criteriaQuery = baseCriteria.getCriteriaQuery();
-        var from = baseCriteria.getFrom();
-
-        if(Objects.nonNull(paginacaoRequest.getSearchText())){
-            andPredicates.add(criteriaBuilder.like(from.get("nome"), "%"+paginacaoRequest.getSearchText()+"%"));
-        }
-
-        criteriaQuery = criteriaQuery.select(from).where(andPredicates.toArray(new Predicate[0]));
-        List<Order> orderList = new ArrayList<>();
-        orderList.add(criteriaBuilder.asc(from.get("nome")));
-        criteriaQuery.orderBy(orderList.toArray(new Order[0]));
-        TypedQuery<Exercise> query = em.createQuery(criteriaQuery);
-        CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);
-        Root<Exercise> countRoot = countQuery.from(criteriaQuery.getResultType());
-        countRoot.alias(from.getAlias());
-        countQuery.select(criteriaBuilder.count(countRoot)).where(andPredicates.toArray(new Predicate[0]));
-        Long totalExercises = em.createQuery(countQuery).getSingleResult();
-        log.info("Total de Exercicios encontrados: {}", totalExercises);
-
-        int page = paginacaoRequest.getPage();
-        int sizePage = paginacaoRequest.getSizePage();
-        Pageable pageable = generatePageable(page, sizePage);
-        page = pageable.getPageNumber();
-        query.setFirstResult(page * sizePage);
-        query.setMaxResults(sizePage);
-        log.info("Buscando os exercicios");
-        List<Exercise> listaExercises = query.getResultList();
-        List<ExerciseResponseDTO> exercisesDTO = new ArrayList<>();
-        for (Exercise ex : listaExercises) {
-            ExerciseResponseDTO exDto = new ExerciseResponseDTO(ex);
-            exercisesDTO.add(exDto);
-        }
-
-        return new PageImpl<>(exercisesDTO, pageable, totalExercises);
+    if (Objects.nonNull(paginacaoRequest.getSearchText())) {
+      andPredicates.add(criteriaBuilder.like(from.get("nome"), "%" + paginacaoRequest.getSearchText() + "%"));
     }
 
-    public List<Exercise> findExercisesForRandomRoutine(CreateRandomExerciseRoutineRequestDTO exerciseFilters){
-        CriteriaResultDTO result = getBaseCriteria(exerciseFilters);
-        CriteriaQuery<Exercise> criteriaQuery;
+    List<Order> orderList = new ArrayList<>();
+    orderList.add(criteriaBuilder.asc(from.get("nome")));
+    criteriaQuery.orderBy(orderList.toArray(new Order[0]));
+    TypedQuery<Exercise> query = em.createQuery(criteriaQuery);
+    CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);
+    Root<Exercise> countRoot = countQuery.from(criteriaQuery.getResultType());
+    countRoot.alias(from.getAlias());
+    countQuery.select(criteriaBuilder.count(countRoot)).where(criteriaQuery.getRestriction());
+    Long totalExercises = em.createQuery(countQuery).getSingleResult();
+    log.info("Total de Exercicios encontrados: {}", totalExercises);
 
-        criteriaQuery = result.getCriteriaQuery().select(result.getFrom()).where(result.getAndPredicates().toArray(new Predicate[0]));
-        TypedQuery<Exercise> query = em.createQuery(criteriaQuery);
-
-        return query.getResultList();
+    int page = paginacaoRequest.getPage();
+    int sizePage = paginacaoRequest.getSizePage();
+    Pageable pageable = generatePageable(page, sizePage);
+    page = pageable.getPageNumber();
+    query.setFirstResult(page * sizePage);
+    query.setMaxResults(sizePage);
+    log.info("Buscando os exercicios");
+    List<Exercise> listaExercises = query.getResultList();
+    List<ExerciseResponseDTO> exercisesDTO = new ArrayList<>();
+    for (Exercise ex : listaExercises) {
+      ExerciseResponseDTO exDto = new ExerciseResponseDTO(ex);
+      exercisesDTO.add(exDto);
     }
 
-    private CriteriaResultDTO getBaseCriteria(CreateRandomExerciseRoutineRequestDTO exerciseFilters) {
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        CriteriaQuery<Exercise> criteriaQuery = criteriaBuilder.createQuery(Exercise.class);
-        List<Predicate> andPredicates = new ArrayList<>();
-        Root<Exercise> from = criteriaQuery.from(Exercise.class);
-        Join<Exercise, BodyPart> joinExerciseBodyPart = from.join("bodyPart");
-        Join<Exercise, ExerciseType> joinExerciseExerciseType= from.join("exerciseType");
-        Join<Exercise, EquipmentType> joinExerciseEquipmentType = from.join("equipmentType");
-        joinExerciseBodyPart.alias("bodyPart");
-        joinExerciseExerciseType.alias("exerciseType");
-        joinExerciseEquipmentType.alias("equipmentType");
+    return new PageImpl<>(exercisesDTO, pageable, totalExercises);
+  }
 
-        if(Objects.nonNull(exerciseFilters.getExerciseTypeId())){
-            andPredicates.add(criteriaBuilder.equal(joinExerciseExerciseType.get("execiseId"), exerciseFilters.getExerciseTypeId()));
-        }
-        if(Objects.nonNull(exerciseFilters.getBodyPartId())){
-            andPredicates.add(criteriaBuilder.equal(joinExerciseBodyPart.get("bodyPartId"), exerciseFilters.getBodyPartId()));
-        }
-        if(Objects.nonNull(exerciseFilters.getEquipmentTypeId())){
-            andPredicates.add(criteriaBuilder.equal(joinExerciseEquipmentType.get("equipmentTypeId"), exerciseFilters.getEquipmentTypeId()));
-        }
+  public List<Exercise> findExercisesForRandomRoutine(CreateRandomExerciseRoutineRequestDTO exerciseFilters) {
+    CriteriaResultDTO result = getBaseCriteria(exerciseFilters);
+    CriteriaQuery<Exercise> criteriaQuery;
 
-        return new CriteriaResultDTO(criteriaQuery, andPredicates, from, criteriaBuilder);
+    criteriaQuery = result.getCriteriaQuery().select(result.getFrom()).where(result.getAndPredicates().toArray(new Predicate[0]));
+    TypedQuery<Exercise> query = em.createQuery(criteriaQuery);
+
+    return query.getResultList();
+  }
+
+  private CriteriaResultDTO getBaseCriteria(CreateRandomExerciseRoutineRequestDTO exerciseFilters) {
+    CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+    CriteriaQuery<Exercise> criteriaQuery = criteriaBuilder.createQuery(Exercise.class);
+    List<Predicate> andPredicates = new ArrayList<>();
+    Root<Exercise> from = criteriaQuery.from(Exercise.class);
+    Join<Exercise, BodyPart> joinExerciseBodyPart = from.join("bodyPart");
+    Join<Exercise, ExerciseType> joinExerciseExerciseType = from.join("exerciseType");
+    Join<Exercise, EquipmentType> joinExerciseEquipmentType = from.join("equipmentType");
+    joinExerciseBodyPart.alias("bodyPart");
+    joinExerciseExerciseType.alias("exerciseType");
+    joinExerciseEquipmentType.alias("equipmentType");
+
+    if (Objects.nonNull(exerciseFilters.getExerciseTypeList())) {
+      criteriaQuery.where(from.get("exerciseType").in(exerciseFilters.getExerciseTypeList()));
     }
-    public Exercise findExerciseById(Long exerciseId) throws ApiErrorException {
-        return repository.findById(exerciseId).orElseThrow(() -> new ApiErrorException(HttpStatus.BAD_REQUEST, MessageEnum.EXERCISE_NOT_FOUND));
+    if (Objects.nonNull(exerciseFilters.getBodyPartList())) {
+      criteriaQuery.where(from.get("bodyPart").in(exerciseFilters.getBodyPartList()));
     }
+    if (Objects.nonNull(exerciseFilters.getEquipmentTypeList())) {
+      criteriaQuery.where(from.get("equipmentType").in(exerciseFilters.getEquipmentTypeList()));
+    }
+
+    return new CriteriaResultDTO(criteriaQuery, andPredicates, from, criteriaBuilder, criteriaBuilder.createQuery(Exercise.class));
+  }
+
+  public Exercise findExerciseById(Long exerciseId) throws ApiErrorException {
+    return repository.findById(exerciseId).orElseThrow(() -> new ApiErrorException(HttpStatus.BAD_REQUEST, MessageEnum.EXERCISE_NOT_FOUND));
+  }
 }

@@ -7,10 +7,7 @@ import com.bolo.fit.service.dto.response.Response;
 import com.bolo.fit.service.dto.response.UserDetailResponseDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("user")
@@ -18,6 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
+
+    @GetMapping("/me")
+    public Response<UserDetailResponseDTO> getLoggedUserData(
+    ){
+        Response<UserDetailResponseDTO> response = new Response<>();
+        response.setOk();
+        response.setData(userService.getUserInfo());
+        return response;
+    }
 
     @PostMapping()
     public Response<UserDetailResponseDTO> createUser(

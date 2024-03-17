@@ -22,7 +22,7 @@ public class ExerciseType extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "fitapp.idexercise_type_id_seq")
     @Column(name = "id")
-    private Long execiseId;
+    private Long execiseTypeId;
 
     @Column(name = "name")
     private String name;
