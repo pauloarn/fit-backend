@@ -57,7 +57,7 @@ public class ExerciseService extends AbstractServiceRepo<ExerciseRepository, Exe
         CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);
         Root<Exercise> countRoot = countQuery.from(criteriaQuery.getResultType());
         countRoot.alias(from.getAlias());
-        countQuery.select(criteriaBuilder.count(countRoot)).where(criteriaQuery.getRestriction());
+        countQuery.select(criteriaBuilder.count(countRoot)).where(andPredicates.toArray(new Predicate[0]));
         Long totalExercises = em.createQuery(countQuery).getSingleResult();
         log.info("Total de Exercicios encontrados: {}", totalExercises);
 
@@ -71,7 +71,7 @@ public class ExerciseService extends AbstractServiceRepo<ExerciseRepository, Exe
         List<Exercise> listaExercises = query.getResultList();
         List<ExerciseResponseDTO> exercisesDTO = new ArrayList<>();
         for (Exercise ex : listaExercises) {
-            ExerciseResponseDTO exDto = new ExerciseResponseDTO(ex, paginacaoRequest.getGetImageBase64());
+            ExerciseResponseDTO exDto = new ExerciseResponseDTO(ex);
             exercisesDTO.add(exDto);
         }
 

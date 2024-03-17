@@ -18,17 +18,18 @@ public class RoutineExerciseResponseDTO {
     private Double restTime;
     private ExerciseResponseDTO execise;
     private List<ExerciseResponseDTO> biSetExercises;
-    public RoutineExerciseResponseDTO (ExerciseRoutineExercise routineExercise, Boolean shouldGetImageData) throws IOException {
+
+    public RoutineExerciseResponseDTO (ExerciseRoutineExercise routineExercise) throws IOException {
         this.routineExerciseId = routineExercise.getExerciseRoutineId();
         this.series = routineExercise.getSeries();
         this.repetitions = routineExercise.getRepetitions();
         this.observation = routineExercise.getNotes();
         this.restTime = routineExercise.getRest_time();
         this.exerciseWeight = routineExercise.getExerciseWeight();
-        this.execise = new ExerciseResponseDTO(routineExercise.getExercise(), shouldGetImageData);
+        this.execise = new ExerciseResponseDTO(routineExercise.getExercise());
         List<ExerciseResponseDTO> listAux = new ArrayList<>();
         for(Exercise ex: routineExercise.getSecondaryExercisesList()){
-            listAux.add(new ExerciseResponseDTO(ex, true));
+            listAux.add(new ExerciseResponseDTO(ex));
         }
         this.biSetExercises = listAux;
     }

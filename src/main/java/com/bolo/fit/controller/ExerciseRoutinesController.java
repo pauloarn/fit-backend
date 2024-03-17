@@ -30,7 +30,6 @@ public class ExerciseRoutinesController {
         DadosExercicioPaginacaoDTO paginacaoRequestData = new DadosExercicioPaginacaoDTO();
         paginacaoRequestData.setPage(page);
         paginacaoRequestData.setSizePage(size);
-        paginacaoRequestData.setGetImageBase64(false);
         response.setOk().setData(exerciseRoutineService.getAllRoutines(paginacaoRequestData));
         return response;
     }

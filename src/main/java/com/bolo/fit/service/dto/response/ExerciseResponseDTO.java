@@ -12,14 +12,12 @@ public class ExerciseResponseDTO {
     private Long exerciseId;
     private String nome;
     private String name;
-    private ImageBase64ResponseDTO imageData;
+    private String imgUrl;
 
-    public ExerciseResponseDTO(Exercise exercise, Boolean shouldGetGifData) throws IOException {
+    public ExerciseResponseDTO(Exercise exercise) throws IOException {
         this.exerciseId = exercise.getExeciseId();
         this.nome = exercise.getNome();
         this.name = exercise.getName();
-        if(shouldGetGifData){
-            this.imageData = exercise.getExerciseGifData();
-        }
+        this.imgUrl = exercise.getGifUrl();
     }
 }

@@ -16,7 +16,8 @@ public class ExerciseRoutineResponseDTO {
     private Integer repetitions;
     private Double restTime;
     private List<RoutineExerciseResponseDTO> listRoutineExercise;
-    public ExerciseRoutineResponseDTO (ExerciseRoutine exerciseRoutine, Boolean shoundGetImageData){
+
+    public ExerciseRoutineResponseDTO (ExerciseRoutine exerciseRoutine){
         this.routineId = exerciseRoutine.getExerciseRoutineId();
         this.routineName = exerciseRoutine.getName();
         this.description = exerciseRoutine.getDescription();
@@ -26,7 +27,7 @@ public class ExerciseRoutineResponseDTO {
         this.listRoutineExercise = exerciseRoutine.getExerciseRoutineExercise().stream()
                 .map((ere) -> {
                     try {
-                        return new RoutineExerciseResponseDTO(ere, shoundGetImageData);
+                        return new RoutineExerciseResponseDTO(ere);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

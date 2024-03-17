@@ -14,6 +14,9 @@ fit:
     port: 5432
     showSql: false
     enableFlyway: ${RUN_FLYWAY:false}
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
 
 spring:
   output:
@@ -44,6 +47,10 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: ${fit.database.showSql}
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  data:
+    redis:
+      host: ${fit.redis.host}
+      port: ${fit.redis.port}
   flyway:
     enabled: ${fit.database.enableFlyway}
     schemas: fitapp

@@ -33,7 +33,6 @@ public class AuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         validateToken(request);
-        getUserLogged(request);
         filterChain.doFilter(request, response);
     }
 
@@ -52,28 +51,9 @@ public class AuthFilter extends OncePerRequestFilter {
         }
     }
 
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        var routeMap = new HashMap<String, List<HttpMethod>>();
-
-        routeMap.put("/session", List.of(HttpMethod.POST));
-
-        var path = request.getRequestURI().replace("/fit-app", "");
-        var method = request.getMethod();
-
-        if (routeMap.containsKey(path)) {
-            return routeMap.get(path).contains(HttpMethod.valueOf(method));
-        }
-
-        return false;
-    }
-
     private String recoverToken(HttpServletRequest request){
         var authorization = request.getHeader("Authorization");
         if(Objects.isNull(authorization)) return null;
         return authorization.replace("Bearer ", "");
-    }
-    private void getUserLogged(HttpServletRequest request) {
-        var authorization = request.getHeader("Authorization");
     }
 }

@@ -9,7 +9,6 @@ public class DadosExercicioPaginacaoDTO {
 
     private Integer page;
     private Integer sizePage;
-    private Boolean getImageBase64 = false;
     private String searchText;
     private Long bodyPartId;
     private Long equipmentTypeId;

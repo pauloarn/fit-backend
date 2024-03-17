@@ -55,7 +55,7 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
         log.info("Searching Exercise Routine");
         ExerciseRoutine er = repository.findById(exerciseRoutineId).orElseThrow(() -> new ApiErrorException(HttpStatus.BAD_REQUEST, MessageEnum.ROUTINE_NOT_FOUND));
         log.info("Exercise Routine Found");
-        return new ExerciseRoutineResponseDTO(er, true);
+        return new ExerciseRoutineResponseDTO(er);
     }
 
     public ExerciseRoutineResponseDTO generateRandomRoutine(CreateRandomExerciseRoutineRequestDTO createRandomExerciseRoutine) throws ApiErrorException {
@@ -97,7 +97,7 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
         routine.setExerciseRoutineExercise(exerciseList);
         ExerciseRoutine er = repository.save(routine);
         log.info("Exercise Routine Created");
-        return new ExerciseRoutineResponseDTO(er, true);
+        return new ExerciseRoutineResponseDTO(er);
     }
 
     public ExerciseRoutineResponseDTO createExerciseRoutine(CreateExerciseRoutineRequestDTO newRoutineData) throws ApiErrorException {
@@ -115,7 +115,7 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
         routine.setExerciseRoutineExercise(exerciseList);
         ExerciseRoutine er = repository.save(routine);
         log.info("Exercise Routine Created");
-        return new ExerciseRoutineResponseDTO(er, true);
+        return new ExerciseRoutineResponseDTO(er);
     }
 
     public void deleteExerciseRoutine(Long exerciseRoutineId) throws ApiErrorException {
@@ -137,7 +137,7 @@ public class ExerciseRoutineService extends AbstractServiceRepo<ExerciseRoutineR
         routine.getExerciseRoutineExercise().addAll(exerciseList);
         ExerciseRoutine er = repository.save(routine);
         log.info("Exercise Routine Updated");
-        return new ExerciseRoutineResponseDTO(er, true);
+        return new ExerciseRoutineResponseDTO(er);
     }
 
     private List<ExerciseRoutineExercise> getExerciseRoutineExercisesFromExerciseList(List<ExerciseRoutineExerciseRequestDTO> routineRequestDTO, ExerciseRoutine routine)
