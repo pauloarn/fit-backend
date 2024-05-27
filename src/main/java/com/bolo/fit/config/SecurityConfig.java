@@ -42,8 +42,8 @@ public class SecurityConfig {
                 .addFilterBefore(loggerFilter, AuthFilter.class)
                 .authorizeHttpRequests(requests ->
                         requests
-                                .requestMatchers("/session").permitAll()
-                                .requestMatchers("/user").permitAll()
+                                .requestMatchers("/session/**").permitAll()
+                                .requestMatchers("/user/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/exercises/image").permitAll()
                                 .anyRequest().authenticated()
                 )

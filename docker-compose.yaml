@@ -8,6 +8,25 @@ networks:
     name: fit_net
 
 services:
+    fit-redis:
+       image: redis/redis-stack-server:latest
+       container_name: fit-redis
+       ports:
+         - '6379:6379'
+    fit_db:
+      container_name: fitApp_db
+      image: postgres:14-alpine
+      restart: no
+      ports:
+       - '5432:5432'
+      environment:
+       - POSTGRES_DB=FitDataBase
+       - POSTGRES_USER=root
+       - POSTGRES_PASSWORD=fitAppStrong@123
+      networks:
+       - fit_net
+      volumes:
+       - fit_app_vol:/var/lib/postgresql/data
 #  fit_service:
 #    container_name: fitApp_service
 #    image: fitapp
@@ -22,17 +41,4 @@ services:
 #      - DB_CONNECTION_HOST=192.168.0.26
 #    networks:
 #      - fit_net
-  fit_db:
-    container_name: fitApp_db
-    image: postgres:14-alpine
-    restart: no
-    ports:
-      - '5432:5432'
-    environment:
-      - POSTGRES_DB=FitDataBase
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=fitAppStrong@123
-    networks:
-      - fit_net
-    volumes:
-      - fit_app_vol:/var/lib/postgresql/data
+

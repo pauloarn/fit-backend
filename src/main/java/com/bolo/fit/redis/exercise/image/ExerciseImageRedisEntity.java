@@ -7,7 +7,7 @@ import org.springframework.data.redis.core.RedisHash;
 
 @Getter
 @Setter
-@RedisHash(value = "ExerciseImage", timeToLive = 60)
+@RedisHash(value = "ExerciseImage", timeToLive = 2592000)
 public class ExerciseImageRedisEntity {
     @Id
     private String id;

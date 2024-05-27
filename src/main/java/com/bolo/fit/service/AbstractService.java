@@ -13,10 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 
-import static com.bolo.fit.utils.ExceptionUtils.logException;
-
 import java.util.Objects;
 import java.util.function.Supplier;
+
+import static com.bolo.fit.utils.ExceptionUtils.logException;
 
 @Log4j2
 public abstract class AbstractService {
@@ -24,6 +24,9 @@ public abstract class AbstractService {
 
     @PersistenceContext
     public EntityManager em;
+
+    @Autowired
+    public ApplicationEventPublisher publisher;
 
     @Autowired
     public final void setJsonUtils(JsonUtils jsonUtils) {

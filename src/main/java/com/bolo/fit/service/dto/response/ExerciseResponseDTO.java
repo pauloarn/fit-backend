@@ -13,6 +13,7 @@ public class ExerciseResponseDTO {
     private String nome;
     private String name;
     private String imgUrl;
+    private String imageBase64;
 
     public ExerciseResponseDTO(Exercise exercise) throws IOException {
         this.exerciseId = exercise.getExeciseId();

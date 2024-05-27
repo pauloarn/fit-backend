@@ -11,15 +11,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 
 @Component
@@ -38,7 +35,7 @@ public class AuthFilter extends OncePerRequestFilter {
 
     private void validateToken(HttpServletRequest request) {
         String token = recoverToken(request);
-        if(Objects.nonNull(token)){
+        if(Objects.nonNull(token) ){
             try {
                 String email = tokenUtils.validateToken(token);
                 User user = userService.findUserByEmail(email);
